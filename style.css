@@ -1,0 +1,1675 @@
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+}
+
+
+
+body{
+
+    background:#080808;
+
+    color:#f5f5f5;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+
+
+
+/* =========================
+   GRAIN
+========================= */
+
+
+#grain{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    opacity:.08;
+
+    background-image:url("assets/grain.png");
+
+    z-index:999;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   PAGES
+========================= */
+
+
+.page{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    height:100dvh;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:#080808;
+
+
+    opacity:0;
+
+    visibility:hidden;
+
+
+    transition:
+
+    opacity 1.5s ease,
+
+    transform 1.5s ease;
+
+
+    transform:scale(1.03);
+
+}
+
+
+
+.page.active{
+
+
+    opacity:1;
+
+
+    visibility:visible;
+
+
+    transform:scale(1);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+
+.countdownBox{
+
+    width:90%;
+
+    text-align:center;
+
+}
+
+
+
+.date{
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-size:clamp(2rem,8vw,4rem);
+
+
+    letter-spacing:5px;
+
+
+    color:#d4af37;
+
+
+}
+
+
+
+
+
+#countdown{
+
+
+    margin-top:35px;
+
+
+    font-size:clamp(2rem,10vw,5rem);
+
+
+    font-weight:300;
+
+
+    letter-spacing:clamp(3px,2vw,10px);
+
+
+}
+
+
+
+
+
+.labels{
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    gap:clamp(10px,5vw,60px);
+
+
+    margin-top:20px;
+
+
+    color:#888;
+
+
+    text-transform:uppercase;
+
+
+    font-size:12px;
+
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   VIDEO
+========================= */
+
+
+#videoPage{
+
+    background:#000;
+
+    overflow:hidden;
+
+}
+
+
+
+#introVideo{
+
+    position:absolute;
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:contain;
+
+
+    display:block;
+
+
+    background:#000;
+
+}
+
+
+
+
+
+#playBtn{
+
+
+    position:absolute;
+
+
+    z-index:20;
+
+
+    padding:15px 45px;
+
+
+    border-radius:50px;
+
+
+    border:1px solid rgba(255,255,255,.5);
+
+
+    background:rgba(0,0,0,.35);
+
+
+    backdrop-filter:blur(10px);
+
+
+    color:white;
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-size:22px;
+
+
+    letter-spacing:2px;
+
+
+    cursor:pointer;
+
+
+    transition:1s ease;
+
+
+}
+
+
+
+
+#playBtn:hover{
+
+
+    background:#d4af37;
+
+
+    color:#000;
+
+
+}
+
+
+
+
+#playBtn.hide{
+
+
+    opacity:0;
+
+
+    transform:scale(.8);
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+#videoMessage{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    text-align:center;
+
+
+    padding:20px;
+
+
+    background:
+
+    radial-gradient(
+
+    circle,
+
+    rgba(0,0,0,.2),
+
+    rgba(0,0,0,.75)
+
+    );
+
+
+    opacity:0;
+
+
+    pointer-events:none;
+
+
+    transition:2s ease;
+
+
+}
+
+
+
+
+
+#videoMessage h1{
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-size:clamp(2rem,6vw,4rem);
+
+
+    line-height:1.3;
+
+
+    max-width:800px;
+
+
+}
+/* =========================
+   QUOTE
+========================= */
+
+
+.quote{
+
+
+    width:90%;
+
+
+    text-align:center;
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+}
+
+
+
+.quote .line{
+
+
+    opacity:0;
+
+
+    font-size:clamp(1.8rem,6vw,4rem);
+
+
+    line-height:1.4;
+
+
+    margin:20px 0;
+
+
+    letter-spacing:1px;
+
+
+}
+
+
+
+#heart{
+
+
+    margin-top:40px;
+
+
+    font-size:50px;
+
+
+    opacity:0;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================
+   VINTAGE LETTER
+========================= */
+
+
+#letterPage{
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(212,175,55,.12),
+        transparent 60%
+    );
+
+}
+
+
+
+.letterBox{
+
+
+    width:min(90%,700px);
+
+
+    padding:45px 55px;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #fff7df,
+
+        #ead7aa
+
+    );
+
+
+    color:#3a2a1a;
+
+
+    border-radius:4px;
+
+
+    position:relative;
+
+
+    box-shadow:
+
+    0 30px 80px rgba(0,0,0,.7);
+
+
+    transform:
+
+    translateY(40px)
+
+    scale(.95);
+
+
+    animation:letterOpen 1.5s ease forwards;
+
+
+}
+
+
+
+@keyframes letterOpen{
+
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(80px)
+
+        scale(.8);
+
+        filter:blur(8px);
+
+    }
+
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0)
+
+        scale(1);
+
+        filter:blur(0);
+
+    }
+
+
+}
+
+
+
+
+.letterBox::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:12px;
+
+
+    border:1px solid rgba(100,70,30,.25);
+
+
+    pointer-events:none;
+
+
+}
+
+
+
+
+
+.letterBox h2{
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    color:#8c6727;
+
+
+    font-size:clamp(2.2rem,6vw,4rem);
+
+
+    margin-bottom:30px;
+
+
+}
+
+
+
+
+
+#typing{
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    color:#3a2a1a;
+
+
+    font-size:clamp(1.2rem,3vw,1.6rem);
+
+
+    line-height:1.9;
+
+
+    min-height:240px;
+
+
+    text-align:left;
+
+
+}
+
+
+
+
+
+.letterBox .next{
+
+    opacity:0;
+
+    transition:1s ease;
+
+}
+
+
+
+.letterBox .next:hover{
+
+
+    background:#d4af37;
+
+
+    color:#000;
+
+
+}
+
+
+
+
+
+
+/* =========================
+   BUTTONS GENERAL
+========================= */
+
+
+button{
+
+
+    padding:13px 38px;
+
+
+    background:transparent;
+
+
+    color:white;
+
+
+    border:1px solid #555;
+
+
+    border-radius:40px;
+
+
+    cursor:pointer;
+
+
+    font-size:16px;
+
+
+    transition:.4s;
+
+
+}
+
+
+
+button:hover{
+
+
+    border-color:#d4af37;
+
+
+    color:#d4af37;
+
+
+}/* =========================
+   MEMORY WALL BASE
+========================= */
+
+
+#memoryPage{
+
+
+    overflow:hidden;
+
+
+    background:#080808;
+
+
+}
+
+
+
+
+
+.memoryBackground{
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle at center,
+
+        rgba(212,175,55,.15),
+
+        transparent 60%
+
+    );
+
+
+}
+
+
+
+
+
+.rope{
+
+
+    position:absolute;
+
+
+    width:80%;
+
+
+    height:2px;
+
+
+    left:10%;
+
+
+    background:rgba(255,255,255,.25);
+
+
+    animation:ropeMove 6s ease-in-out infinite;
+
+
+}
+
+
+
+
+
+.rope1{
+
+
+    top:25%;
+
+
+}
+
+
+
+
+
+.rope2{
+
+
+    bottom:25%;
+
+
+}
+
+
+
+
+
+@keyframes ropeMove{
+
+
+    0%,100%{
+
+
+        transform:rotate(-1deg);
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:rotate(1deg);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   MEMORY PHOTOS
+========================= */
+
+
+.memory{
+
+
+    position:absolute;
+
+
+    width:170px;
+
+
+    height:220px;
+
+
+    background:#fff;
+
+
+    padding:10px;
+
+
+    box-shadow:
+
+
+    0 20px 40px rgba(0,0,0,.5);
+
+
+    transform-origin:top center;
+
+
+    animation:sway 6s ease-in-out infinite;
+
+
+}
+
+
+
+
+
+.memory img{
+
+
+    width:100%;
+
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+}
+
+
+
+
+
+.clip{
+
+
+    position:absolute;
+
+
+    top:-18px;
+
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+    width:25px;
+
+
+    height:35px;
+
+
+    background:#b8894a;
+
+
+    border-radius:5px;
+
+
+    z-index:2;
+
+
+}
+
+
+
+
+
+@keyframes sway{
+
+
+    0%,100%{
+
+
+        transform:rotate(-3deg);
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:rotate(3deg);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* =========================
+   MEMORY POSITIONS
+========================= */
+
+
+.memory1{
+
+
+    top:18%;
+
+
+    left:12%;
+
+
+}
+
+
+
+.memory2{
+
+
+    top:15%;
+
+
+    left:35%;
+
+
+}
+
+
+
+.memory3{
+
+
+    top:20%;
+
+
+    right:12%;
+
+
+}
+
+
+
+.memory4{
+
+
+    bottom:18%;
+
+
+    left:18%;
+
+
+}
+
+
+
+.memory5{
+
+
+    bottom:15%;
+
+
+    left:42%;
+
+
+}
+
+
+
+.memory6{
+
+
+    bottom:20%;
+
+
+    right:15%;
+
+
+}
+
+
+
+
+
+.memory7{
+
+
+    top:45%;
+
+
+    left:5%;
+
+
+}
+
+
+
+
+
+.memory8{
+
+
+    top:45%;
+
+
+    right:5%;
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   MEMORY TEXT
+========================= */
+
+
+.memoryText{
+
+
+    position:absolute;
+
+
+    z-index:20;
+
+
+    width:85%;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.memoryText::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:-40px;
+
+
+    background:
+
+
+    radial-gradient(
+
+        circle,
+
+        rgba(0,0,0,.85),
+
+        transparent 70%
+
+    );
+
+
+    filter:blur(20px);
+
+
+    z-index:-1;
+
+
+}
+
+
+
+
+
+
+#memoryQuote{
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-size:clamp(2rem,5vw,4rem);
+
+
+    line-height:1.4;
+
+
+    color:#d4af37;
+
+
+    text-shadow:
+
+
+    0 0 20px rgba(0,0,0,.8);
+
+
+    transition:2s ease;
+
+
+}
+/* =========================
+   QUESTION PAGE
+========================= */
+
+
+.questionBox{
+
+
+    width:90%;
+
+
+    max-width:900px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.questionBox h1{
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-weight:500;
+
+
+    font-size:clamp(2rem,6vw,4rem);
+
+
+    line-height:1.4;
+
+
+}
+
+
+
+
+
+
+.buttons{
+
+    margin-top:70px;
+
+    position:relative;
+
+    width:100%;
+
+    height:180px;
+
+}
+
+
+
+#yes{
+
+    position:absolute;
+
+    left:35%;
+
+    top:20px;
+
+    transform:translateX(-50%);
+
+    background:#d4af37;
+
+    color:#000;
+
+    border:none;
+
+    padding:15px 50px;
+
+}
+
+
+
+#no{
+
+    position:absolute;
+
+    left:65%;
+
+    top:20px;
+
+    transform:translateX(-50%);
+
+    padding:15px 50px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid #777;
+
+    color:white;
+
+}
+
+
+
+
+
+
+
+/* =========================
+   FINAL PAGE
+========================= */
+
+
+.finalScene{
+
+
+    width:90%;
+
+
+    text-align:center;
+
+
+}
+
+
+
+
+
+.finalLine{
+
+
+    opacity:0;
+
+
+    transform:translateY(40px);
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+}
+
+
+
+
+
+.finalLine.one{
+
+
+    font-size:clamp(2rem,6vw,4rem);
+
+
+}
+
+
+
+
+
+.finalLine.two{
+
+
+    margin-top:40px;
+
+
+    color:#ddd;
+
+
+    font-size:clamp(2rem,6vw,4rem);
+
+
+}
+
+
+
+
+
+.finalLine.three{
+
+
+    margin-top:50px;
+
+
+    color:#d4af37;
+
+
+    font-size:clamp(3rem,8vw,6rem);
+
+
+}
+
+
+
+
+
+
+
+.finalMessage{
+
+
+    margin-top:50px;
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-size:clamp(1.3rem,4vw,2rem);
+
+
+    line-height:2;
+
+
+    color:#ddd;
+
+
+    opacity:0;
+
+
+}
+
+
+
+
+
+
+
+.finalLast{
+
+
+    margin-top:60px;
+
+
+    font-family:'Cormorant Garamond',serif;
+
+
+    font-size:clamp(1.8rem,5vw,3rem);
+
+
+    color:#d4af37;
+
+
+    opacity:0;
+
+
+}
+
+
+
+
+
+
+.finalShow{
+
+
+    animation:finalAppear 2s ease forwards;
+
+
+}
+
+
+
+
+
+@keyframes finalAppear{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:translateY(40px);
+
+
+        filter:blur(10px);
+
+
+    }
+
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:translateY(0);
+
+
+        filter:blur(0);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:600px){
+
+
+
+    .page{
+
+
+        padding:15px;
+
+
+    }
+
+
+
+    #introVideo{
+
+
+        object-fit:contain;
+
+
+    }
+
+
+
+
+
+    .memory{
+
+
+        width:95px;
+
+
+        height:125px;
+
+
+        padding:6px;
+
+
+    }
+
+
+
+
+
+    .clip{
+
+
+        width:15px;
+
+
+        height:25px;
+
+
+        top:-12px;
+
+
+    }
+
+
+
+
+
+    .memory7,
+    .memory8{
+
+
+        display:none;
+
+
+    }
+
+
+
+
+
+    #memoryQuote{
+
+
+        font-size:2rem;
+
+
+    }
+
+
+
+
+
+    .questionBox h1{
+
+
+        font-size:2rem;
+
+
+    }
+
+
+
+
+    #yes,
+    #no{
+
+
+        padding:12px 28px;
+
+
+        font-size:15px;
+
+
+    }
+
+
+
+
+
+    .finalLine.one,
+    .finalLine.two{
+
+
+        font-size:2rem;
+
+
+    }
+
+
+
+
+
+    .finalLine.three{
+
+
+        font-size:3rem;
+
+
+    }
+
+
+
+}
+
+
+
+
+@media(max-width:380px){
+
+
+
+    .memory{
+
+
+        width:80px;
+
+
+        height:110px;
+
+
+    }
+
+
+
+
+    #memoryQuote{
+
+
+        font-size:1.6rem;
+
+
+    }
+
+
+
+}
