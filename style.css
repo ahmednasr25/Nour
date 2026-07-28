@@ -60,6 +60,8 @@ body{
 
     opacity:.12;
 
+    transition:opacity 1.5s ease;
+
     z-index:999;
 
 }
@@ -346,7 +348,6 @@ body{
    VIDEO
 ========================= */
 
-
 #videoPage{
 
     background:#000;
@@ -368,10 +369,12 @@ body{
     transform:translate(-50%,-50%);
 
 
-    width:100%;
+    height:100vh;
+
+    width:auto;
 
 
-    height:100%;
+    max-width:none;
 
 
     object-fit:contain;
@@ -384,6 +387,41 @@ body{
 
 }
 
+
+
+
+
+
+/* شاشات الموبايل الطويلة */
+
+@media(max-aspect-ratio:9/16){
+
+    #introVideo{
+
+        width:100%;
+
+        height:auto;
+
+    }
+
+}
+
+
+
+
+/* الشاشات العريضة مثل اللاب */
+
+@media(min-aspect-ratio:9/16){
+
+    #introVideo{
+
+        height:100vh;
+
+        width:auto;
+
+    }
+
+}
 
 
 
@@ -1284,7 +1322,29 @@ button:hover{
 }
 
 
+/* =========================
+   MEMORY PHOTOS HOVER
+========================= */
 
+/* لما نقف على أي صورة */
+.memory:hover {
+    transform: scale(1.1) rotate(0deg) !important; /* تكبر وتتعدل */
+    z-index: 50; /* تطلع فوق كل حاجة */
+    box-shadow: 0 10px 50px rgba(212, 175, 55, 0.6); /* جلو ذهبي */
+    border-color: #d4af37; /* الإطار يقلب ذهبي */
+}
+
+/* لما نقف على صورة، باقي الصور تتطفي */
+#memoryPage:has(.memory:hover) .memory:not(:hover) {
+    opacity: 0.3 !important;
+    filter: blur(2px) grayscale(50%);
+}
+
+/* الـ Clips كمان تتفاعل */
+.memory:hover .clip {
+    background: #d4af37;
+    transform: translateX(-50%) scale(1.1);
+}
 
 
 
@@ -1359,60 +1419,55 @@ button:hover{
 
 
 .buttons{
+    margin-top: 50px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* المسافة بين الزرارين */
+    min-height: 200px;
+}
 
-    margin-top:70px;
+#yes, #no {
+    position: relative; /* خليهم يترتبوا جنب بعض طبيعي */
+    left: auto;
+    top: auto;
+    transform: none;
+    padding: 15px 45px;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    white-space: nowrap;
+}
 
-    position:relative;
+#yes {
+    background: #d4af37;
+    color: #000;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
 
-    width:100%;
+#no {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
 
-    height:180px;
+/* تنسيق النص جوه زرار No */
+#no .no-text {
+    pointer-events: none; /* عشان الماوس يشوف الزرار مش النص */
+    transition: opacity 0.3s ease;
+}
 
+/* إضافة Transition ناعم لحركة الزرار */
+#no {
+    transition: left 0.15s ease-out, top 0.15s ease-out, transform 0.2s ease;
+    will-change: left, top, transform; /* تحسين الأداء */
 }
 
 
-
-#yes{
-
-    position:absolute;
-
-    left:35%;
-
-    top:20px;
-
-    transform:translateX(-50%);
-
-    background:#d4af37;
-
-    color:#000;
-
-    border:none;
-
-    padding:15px 50px;
-
-}
-
-
-
-#no{
-
-    position:absolute;
-
-    left:65%;
-
-    top:20px;
-
-    transform:translateX(-50%);
-
-    padding:15px 50px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid #777;
-
-    color:white;
-
-}
 
 
 
@@ -1794,3 +1849,139 @@ button:hover{
 
 
 }
+
+/* =========================
+   NEW FINAL PAGE ROMANCE
+========================= */
+
+#finalPage {
+    background:
+    radial-gradient(
+        circle at center,
+        rgba(30, 20, 10, 1), /* دافئ */
+        #000 70%
+    );
+}
+
+/* مطر القلوب الذهبية */
+#heartsRain {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart-drop {
+    position: absolute;
+    color: rgba(212, 175, 55, 0.5); /* ذهبي خفيف */
+    font-size: 20px;
+    user-select: none;
+    animation: heartFall linear infinite;
+}
+
+@keyframes heartFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+
+/* تنسيق النصوص الجديد */
+.finalScene {
+    z-index: 5; /* فوق المطر */
+}
+
+.white-heart {
+    display: inline-block;
+    animation: heartBeat 2s infinite;
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* تجميع الرسايل عشان تظهر مع بعض */
+.finalMessageBlock {
+    margin-top: 50px;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.finalMessageBlock.finalShow {
+    opacity: 1;
+}
+
+.finalMessage {
+    margin-top: 20px; /* تباعد أقل جوه البلوك */
+    opacity: 1 !important; /* بتعتمد ع البلوك */
+}
+
+.love-you {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: #fff;
+    margin-top: 40px;
+}
+
+/* =========================
+   ENVELOPE STYLES
+========================= */
+.envelope-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.5s ease, opacity 0.8s ease;
+    z-index: 10;
+}
+
+.envelope-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.envelope {
+    width: 280px;
+    height: 180px;
+    background: #e2c99b;
+    border: 2px solid #b8894a;
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+.wax-seal {
+    font-size: 45px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    animation: pulseSeal 2s infinite ease-in-out;
+}
+
+@keyframes pulseSeal {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+.envelope-click-hint {
+    margin-top: 25px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: #d4af37;
+    letter-spacing: 1px;
+}
+
+.hidden-letter {
+    display: none;
+    opacity: 0;
+}
+
+.show-letter {
+    display: block !important;
+    animation: letterOpen 1.2s ease forwards !important;
+}
+
