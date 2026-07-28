@@ -56,6 +56,9 @@ const playBtn =
 document.getElementById("playBtn");
 
 
+const grain =
+document.getElementById("grain");
+
 
 const no =
 document.getElementById("no");
@@ -126,7 +129,7 @@ function showPage(page){
 
 
 const targetDate =
-new Date("August 22, 2026 00:00:00").getTime();
+new Date("August 22, 2025 00:00:00").getTime();
 
 
 
@@ -272,23 +275,19 @@ function startMovie(){
 
 playBtn.addEventListener("click",()=>{
 
-
     introVideo.play()
     .then(()=>{
 
-
         playBtn.classList.add("hide");
 
+        grain.style.opacity = "0";
 
     })
     .catch(err=>{
 
-
         console.log(err);
 
-
     });
-
 
 });
 
@@ -430,23 +429,43 @@ function showQuote(){
 
 
 
-    setTimeout(()=>{
-
-
+setTimeout(()=>{
         showPage(letterPage);
-
-
-        startTyping();
-
-
-
+        setupEnvelope(); // تجهيز الظرف للضغط
     },10500);
 
 
 
 }
 
+/* =========================
+   ENVELOPE LOGIC
+========================= */
+function setupEnvelope() {
+    const envelopeWrapper = document.getElementById("envelopeWrapper");
+    const letterBox = document.querySelector(".letterBox");
 
+    envelopeWrapper.style.display = "flex";
+    envelopeWrapper.style.opacity = "1";
+    letterBox.classList.remove("show-letter");
+    letterBox.classList.add("hidden-letter");
+
+    function openEnvelope() {
+        envelopeWrapper.style.transform = "scale(0.8)";
+        envelopeWrapper.style.opacity = "0";
+
+        setTimeout(() => {
+            envelopeWrapper.style.display = "none";
+            letterBox.classList.remove("hidden-letter");
+            letterBox.classList.add("show-letter");
+            startTyping();
+        }, 600);
+
+        envelopeWrapper.removeEventListener("click", openEnvelope);
+    }
+
+    envelopeWrapper.addEventListener("click", openEnvelope);
+}
 
 
 
@@ -643,7 +662,7 @@ function startMemoryAnimation(){
 
 
 
-    },30000);
+    },35000);
 
 
 
@@ -878,51 +897,92 @@ function exitMemoryWall(){
 
 }
 /* =========================
-   NO BUTTON ESCAPE
+   NO BUTTON FLEE LOGIC (PERFECT ALIGNMENT)
 ========================= */
 
+const noTextSpan = no.querySelector(".no-text") || no;
 
-function escapeNo(){
+const noTexts = [
+    "NO",
+    "Are you sure?",
+    "Think again!",
+    "Really?",
+    "Nice try 😉",
+    "Don't do this",
+    "Please?",
+    "You can't catch me!",
+    "Wrong answer",
+    "Error 404: No not found"
+];
 
-    const area = document.querySelector(".buttons");
+let noTextIndex = 0;
+let isFleeing = false;
 
-    const x = Math.random()*60 + 20;
+function runFromMouse(e) {
+    if (!questionPage.classList.contains("active")) return;
 
-    const y = Math.random()*70;
+    const mouseX = e.clientX || (e.touches && e.touches[0].clientX);
+    const mouseY = e.clientY || (e.touches && e.touches[0].clientY);
 
+    if (!mouseX || !mouseY) return;
 
-    no.style.left = x + "%";
+    const btnRect = no.getBoundingClientRect();
+    const btnCenterX = btnRect.left + btnRect.width / 2;
+    const btnCenterY = btnRect.top + btnRect.height / 2;
 
-    no.style.top = y + "%";
+    const deltaX = mouseX - btnCenterX;
+    const deltaY = mouseY - btnCenterY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    no.style.transform =
-    `translateX(-50%) rotate(${Math.random()*40-20}deg)`;
+    const fleeDistance = 130;
 
+    if (distance < fleeDistance) {
+        if (!isFleeing) {
+            isFleeing = true;
+            no.style.position = 'fixed';
+            no.style.left = `${btnRect.left}px`;
+            no.style.top = `${btnRect.top}px`;
+            no.style.margin = '0';
+        }
+
+        const angle = Math.atan2(deltaY, deltaX);
+        const fleeX = Math.cos(angle) * -1 * (fleeDistance - distance + 20);
+        const fleeY = Math.sin(angle) * -1 * (fleeDistance - distance + 20);
+
+        let newLeft = btnRect.left + fleeX;
+        let newTop = btnRect.top + fleeY;
+
+        const padding = 20;
+        const maxLeft = window.innerWidth - btnRect.width - padding;
+        const maxTop = window.innerHeight - btnRect.height - padding;
+
+        newLeft = Math.max(padding, Math.min(newLeft, maxLeft));
+        newTop = Math.max(padding, Math.min(newTop, maxTop));
+
+        no.style.left = `${newLeft}px`;
+        no.style.top = `${newTop}px`;
+    }
 }
 
+function changeNoText() {
+    if (noTextSpan.querySelector && noTextSpan.querySelector(".no-text")) {
+        const span = noTextSpan.querySelector(".no-text");
+        span.style.opacity = "0";
+        setTimeout(() => {
+            noTextIndex = (noTextIndex + 1) % noTexts.length;
+            span.textContent = noTexts[noTextIndex];
+            span.style.opacity = "1";
+        }, 150);
+    } else {
+        noTextIndex = (noTextIndex + 1) % noTexts.length;
+        noTextSpan.textContent = noTexts[noTextIndex];
+    }
+}
 
-no.addEventListener(
-"mouseenter",
-escapeNo
-);
-
-
-
-// للموبايل
-
-no.addEventListener(
-
-    "touchstart",
-
-    escapeNo
-
-);
-
-
-
-
-
-
+document.addEventListener("mousemove", runFromMouse);
+document.addEventListener("touchmove", runFromMouse);
+no.addEventListener("mouseenter", changeNoText);
+no.addEventListener("touchstart", changeNoText);
 
 
 
@@ -954,111 +1014,77 @@ yes.addEventListener("click",()=>{
 
 
 /* =========================
-   FINAL ANIMATION
+   NEW FINAL ANIMATION & HEARTS RAIN
 ========================= */
-
 
 function startFinalAnimation(){
 
+    const lines = document.querySelectorAll(".finalLine");
+    const messageBlock = document.querySelector(".finalMessageBlock");
+    const last = document.querySelector(".finalLast");
+    
 
 
-    const lines =
-
-    document.querySelectorAll(".finalLine");
-
+    // 1. بدأ مطر القلوب
+    createHeartsRain();
 
 
-    const message =
-
-    document.querySelector(".finalMessage");
-
-
-
-    const last =
-
-    document.querySelector(".finalLast");
-
-
-
-
-
-
-
+    // 2. ظهور النصوص بتوقيت رومانسي وبطيء
 
     setTimeout(()=>{
-
-
         lines[0].classList.add("finalShow");
-
-
-
-    },1500);
-
-
-
-
-
+    }, 2000); // 2 ثانية
 
 
     setTimeout(()=>{
-
-
         lines[1].classList.add("finalShow");
-
-
-
-    },4500);
-
-
-
-
-
-
+    }, 6000); // 6 ثانية
 
 
     setTimeout(()=>{
-
-
         lines[2].classList.add("finalShow");
-
-
-
-    },7500);
-
-
-
-
-
-
+    }, 10000); // 10 ثانية
 
 
     setTimeout(()=>{
-
-
-        message.classList.add("finalShow");
-
-
-
-    },10500);
-
-
-
-
-
+        messageBlock.classList.add("finalShow"); // يظهر البلوك كله
+    }, 15000); // 15 ثانية
 
 
     setTimeout(()=>{
-
-
         last.classList.add("finalShow");
+    }, 21000); // 21 ثانية
+
+}
 
 
 
-    },15000);
+// دالة لإنشاء مطر القلوب الذهبية
+function createHeartsRain() {
+    const rainContainer = document.getElementById("heartsRain");
+    const heartSymbols = ["🤍", "❤️", "💛", "💖"];
 
+    // إنشاء قلب كل فترة
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart-drop");
 
+        // اختيار رمز عشوائي
+        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
 
+        // إحداثيات عشوائية
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 4) + "s"; // بين 4 لـ 7 ثواني
+        heart.style.opacity = Math.random() * 0.5 + 0.2; // شفافية مختلفة
 
+        rainContainer.appendChild(heart);
+
+        // إزالة القلب بعد انتهاء الأنميشن
+        setTimeout(() => {
+            heart.remove();
+        }, 7000);
+
+    }, 300); // قلب جديد كل 0.3 ثانية
 }
 
 
