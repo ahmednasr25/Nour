@@ -195,35 +195,25 @@
 ========================= -->
 
 
+<!-- =========================
+     LETTER (WITH ENVELOPE)
+========================= -->
 <section id="letterPage" class="page">
 
-
-    <div class="letterBox">
-
-
-        <h2>
-
-            A Letter For You
-
-        </h2>
-
-
-
-        <p id="typing"></p>
-
-
-
-
-        <button class="next">
-
-            Continue
-
-        </button>
-
-
-
+    <!-- الظرف الفينتاج -->
+    <div id="envelopeWrapper" class="envelope-wrapper">
+        <div class="envelope">
+            <div class="wax-seal">💌</div>
+            <p class="envelope-click-hint">Click to open your letter</p>
+        </div>
     </div>
 
+    <!-- كارت الرسالة (مخفي ف الأول) -->
+    <div class="letterBox hidden-letter">
+        <h2>A Letter For You</h2>
+        <p id="typing"></p>
+        <button class="next">Continue</button>
+    </div>
 
 </section>
 <!-- =========================
@@ -436,9 +426,7 @@
 
 
             <button id="no">
-
-                NO
-
+                <span class="no-text">NO</span>
             </button>
 
 
@@ -465,85 +453,46 @@
 
 <section id="finalPage" class="page">
 
+    <!-- حاوية مطر القلوب الذهبية -->
+    <div id="heartsRain"></div>
 
     <div class="finalScene">
-
-
         <h1 class="finalLine one">
-
             And this is not the end...
-
         </h1>
-
-
 
         <h1 class="finalLine two">
-
             It's just another chapter.
-
         </h1>
-
-
 
         <h1 class="finalLine three">
-
             Happy Birthday
-
             <br>
-
-            Nour 🤍
-
+            Nour <span class="white-heart">🤍</span>
         </h1>
 
+        <div class="finalMessageBlock">
+            <p class="finalMessage">
+                Thank you for every laugh.
+                <br>
+                Every moment.
+                <br>
+                Every memory.
+            </p>
 
-
-
-
-        <p class="finalMessage">
-
-
-            Thank you for every laugh.
-
-            <br>
-
-            Every moment.
-
-            <br>
-
-            Every memory.
-
-            <br><br>
-
-            I love you.
-
-            <br><br>
-
-            Always.
-
-
-        </p>
-
-
-
-
+            <p class="finalMessage love-you">
+                I love you.
+                <br>
+                Always.
+            </p>
+        </div>
 
         <p class="finalLast">
-
-
             Forever isn't a place...
-
             <br>
-
             It's every moment spent with you.
-
-
         </p>
-
-
-
     </div>
-
-
 </section>
 
 
