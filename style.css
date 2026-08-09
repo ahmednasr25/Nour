@@ -358,69 +358,61 @@ body{
 
 
 
-#introVideo{
+/* =========================
+   VIDEO
+========================= */
 
-    position:absolute;
-
-    top:50%;
-
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-
-    height:100vh;
-
-    width:auto;
-
-
-    max-width:none;
-
-
-    object-fit:contain;
-
-
-    display:block;
-
-
-    background:#000;
-
+#videoPage {
+    background: #000;
+    overflow: hidden;
+    padding: 0;
 }
 
+#introVideo {
+    position: absolute;
+    inset: 0;
 
+    width: 100%;
+    height: 100%;
 
+    display: block;
 
+    object-fit: contain;
 
-
-/* شاشات الموبايل الطويلة */
-
-@media(max-aspect-ratio:9/16){
-
-    #introVideo{
-
-        width:100%;
-
-        height:auto;
-
-    }
-
+    background: #000;
 }
 
+/* =========================
+   MOBILE VIDEO
+========================= */
 
+@media (max-width: 600px) {
 
+    #videoPage {
+        width: 100%;
+        height: 100dvh;
 
-/* الشاشات العريضة مثل اللاب */
+        overflow: hidden;
 
-@media(min-aspect-ratio:9/16){
-
-    #introVideo{
-
-        height:100vh;
-
-        width:auto;
-
+        /* منع أي حركة بسبب الـ viewport */
+        position: fixed;
+        inset: 0;
     }
 
+    #introVideo {
+        position: absolute;
+        inset: 0;
+
+        width: 100%;
+        height: 100dvh;
+
+        object-fit: cover;
+
+        max-width: none;
+        max-height: none;
+
+        transform: none;
+    }
 }
 
 

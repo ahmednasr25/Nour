@@ -39,6 +39,36 @@ document.getElementById("countdown");
 const introVideo =
 document.getElementById("introVideo");
 
+const videoSource =
+document.getElementById("videoSource");
+
+
+
+function setVideoForDevice() {
+
+    const isMobile =
+        window.matchMedia("(max-width: 600px)").matches;
+
+
+    const newSource = isMobile
+        ? "assets/intro-mobile.mp4"
+        : "assets/intro.mp4";
+
+
+    if (videoSource.getAttribute("src") !== newSource) {
+
+        videoSource.src = newSource;
+
+        introVideo.load();
+
+    }
+
+}
+
+
+
+setVideoForDevice();
+
 
 const videoMessage =
 document.getElementById("videoMessage");
