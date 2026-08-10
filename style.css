@@ -887,29 +887,40 @@ button:hover {
    LETTER CONTAINER
 ========================================================= */
 
-/*
-    IMPORTANT:
+#letterPage {
 
-    letterBox is completely hidden
-    until JavaScript adds .show-letter.
-*/
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212,175,55,.12),
+            transparent 65%
+        );
+
+}
+
+
+/* =========================================================
+   LETTER CONTAINER
+========================================================= */
 
 .letterBox {
 
     width:
-        min(90%, 700px);
+        min(92%, 760px);
 
     display: flex;
 
     justify-content: center;
 
     align-items: center;
+
 }
 
 
 .letterBox.hidden-letter {
 
     display: none;
+
 }
 
 
@@ -918,12 +929,15 @@ button:hover {
     display: flex;
 
     animation:
-        letterAppear 1.3s ease forwards;
+        letterAppear 1.4s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
 }
 
 
 /* =========================================================
-   ACTUAL LETTER PAPER
+   LETTER PAPER
 ========================================================= */
 
 .letter-paper {
@@ -932,10 +946,9 @@ button:hover {
 
     width: 100%;
 
-    min-height: 520px;
+    height: min(82vh, 650px);
 
-    padding:
-        55px 60px;
+    padding: 55px 60px;
 
     background:
         linear-gradient(
@@ -953,8 +966,16 @@ button:hover {
         rgba(0,0,0,.7);
 
     overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
 }
 
+
+/* =========================================================
+   PAPER TEXTURE
+========================================================= */
 
 .letter-paper::before {
 
@@ -962,13 +983,86 @@ button:hover {
 
     position: absolute;
 
-    inset: 14px;
+    inset: 13px;
 
     border:
         1px solid
-        rgba(100,70,30,.25);
+        rgba(112,79,38,.25);
 
     pointer-events: none;
+
+}
+
+
+.letter-paper::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255,255,255,.5),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(120,80,30,.08),
+            transparent 30%
+        );
+
+}
+
+
+/* =========================================================
+   LETTER DECORATION
+========================================================= */
+
+.letter-decoration {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 15px;
+
+    color: #a27a32;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+}
+
+
+.letter-decoration span:first-child,
+.letter-decoration span:last-child {
+
+    font-size: 13px;
+
+    color: #c29a4a;
+
 }
 
 
@@ -980,8 +1074,9 @@ button:hover {
 
     position: relative;
 
-    margin:
-        0 0 30px;
+    z-index: 2;
+
+    margin: 0;
 
     text-align: center;
 
@@ -991,14 +1086,90 @@ button:hover {
 
     font-size:
         clamp(
-            2.2rem,
+            2.5rem,
             6vw,
-            4rem
+            4.3rem
         );
 
     font-weight: 600;
 
-    color: #8c6727;
+    line-height: 1;
+
+    color: #68491f;
+
+    text-shadow:
+        0 1px 0
+        rgba(255,255,255,.6);
+
+}
+
+
+/* =========================================================
+   LETTER DIVIDER
+========================================================= */
+
+.letter-divider {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin:
+        22px auto 30px;
+
+    width: 75%;
+
+}
+
+
+.letter-divider span {
+
+    height: 1px;
+
+    flex: 1;
+
+    background:
+        linear-gradient(
+            to right,
+            transparent,
+            rgba(140,103,39,.55)
+        );
+
+}
+
+
+.letter-divider span:last-child {
+
+    background:
+        linear-gradient(
+            to left,
+            transparent,
+            rgba(140,103,39,.55)
+        );
+
+}
+
+
+.letter-divider b {
+
+    color: #a27a32;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 20px;
+
+    font-weight: 400;
+
 }
 
 
@@ -1010,22 +1181,19 @@ button:hover {
 
     position: relative;
 
-    display: block;
-
     width: 100%;
 
-    min-height: 260px;
+    flex: 1;
 
     margin: 0;
 
     text-align: left;
 
-    /*
-        Preserve line breaks from
-        the letterText string.
-    */
-
     white-space: pre-line;
+
+    overflow-y: auto;
+
+    padding-right: 12px;
 
     font-family:
         'Cormorant Garamond',
@@ -1038,9 +1206,62 @@ button:hover {
             1.6rem
         );
 
-    line-height: 1.9;
+    line-height: 1.8;
 
     color: #3a2a1a;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        rgba(140,103,39,.6)
+        transparent;
+}
+
+
+/* =========================================================
+   SIGNATURE
+========================================================= */
+
+.letter-signature {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 25px;
+
+    text-align: right;
+
+    color: #75552a;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+}
+
+
+.letter-signature span {
+
+    display: block;
+
+    font-size: 1.15rem;
+
+    font-style: italic;
+
+}
+
+
+.letter-signature strong {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-size: 1.8rem;
+
+    font-weight: 600;
+
 }
 
 
@@ -1050,35 +1271,57 @@ button:hover {
 
 .letter-paper .next {
 
+    position: relative;
+
+    z-index: 3;
+
     display: block;
 
     margin:
-        25px auto 0;
+        28px auto 0;
+
+    padding:
+        10px 25px;
 
     opacity: 0;
 
     pointer-events: none;
 
     border:
-        1px solid #8c6727;
+        1px solid
+        #9b7434;
 
-    color: #6b4b25;
+    border-radius: 30px;
 
-    background: transparent;
+    background:
+        rgba(255,255,255,.2);
+
+    color:
+        #68491f;
 
     font-family:
         'Cormorant Garamond',
         serif;
 
-    font-size: 17px;
+    font-size: 18px;
 
-    padding:
-        11px 35px;
-
-    border-radius: 30px;
+    letter-spacing: 1px;
 
     transition:
         .4s ease;
+
+}
+
+
+.letter-paper .next span {
+
+    display: inline-block;
+
+    margin-left: 8px;
+
+    transition:
+        transform .3s ease;
+
 }
 
 
@@ -1086,9 +1329,22 @@ button:hover {
 
     background: #d4af37;
 
+    border-color: #d4af37;
+
     color: #000;
 
-    border-color: #d4af37;
+    box-shadow:
+        0 8px 25px
+        rgba(212,175,55,.25);
+
+}
+
+
+.letter-paper .next:hover span {
+
+    transform:
+        translateX(5px);
+
 }
 
 
@@ -1103,11 +1359,13 @@ button:hover {
         opacity: 0;
 
         transform:
-            translateY(50px)
-            scale(.94);
+            translateY(60px)
+            scale(.94)
+            rotateX(5deg);
 
         filter:
             blur(8px);
+
     }
 
     to {
@@ -1116,11 +1374,140 @@ button:hover {
 
         transform:
             translateY(0)
-            scale(1);
+            scale(1)
+            rotateX(0);
 
         filter:
             blur(0);
+
     }
+
+}
+
+
+/* =========================================================
+   MOBILE LETTER
+========================================================= */
+
+@media(max-width:600px) {
+
+    .letterBox {
+
+        width: 94%;
+
+    }
+
+.letter-paper {
+
+    height: 82vh;
+
+    min-height: 0;
+
+    padding: 40px 28px;
+}
+
+
+    .letter-decoration {
+
+        gap: 9px;
+
+        font-size: 8px;
+
+        letter-spacing: 3px;
+
+    }
+
+
+    .letter-paper h2 {
+
+        font-size: 2.7rem;
+
+    }
+
+
+    .letter-divider {
+
+        width: 85%;
+
+        margin:
+            18px auto 25px;
+
+    }
+
+
+    #typing {
+
+        font-size: 1.25rem;
+
+        line-height: 1.8;
+
+        min-height: 0;
+
+        overflow-y: auto;
+    }
+
+
+    .letter-signature {
+
+        margin-top: 15px;
+
+    }
+
+
+    .letter-signature span {
+
+        font-size: 1rem;
+
+    }
+
+
+    .letter-signature strong {
+
+        font-size: 1.55rem;
+
+    }
+
+
+    .letter-paper .next {
+
+        margin-top: 20px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:380px) {
+
+    .letter-paper {
+
+        padding:
+            32px 22px 25px;
+
+    }
+
+
+    .letter-paper h2 {
+
+        font-size: 2.3rem;
+
+    }
+
+
+    #typing {
+
+        font-size: 1.1rem;
+
+        line-height: 1.7;
+
+        min-height: 330px;
+
+    }
+
 }
 
 

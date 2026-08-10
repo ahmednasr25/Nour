@@ -495,22 +495,46 @@ function setupEnvelope() {
    LETTER CONTENT
 ========================================================= */
 
-const letterText = `Dear Nouran,
+const letterText = `Dear Nour,
 
-Today is not just another day.
+There are some things
+that are difficult to say out loud.
 
-It is a reminder of every laugh,
-every conversation,
-and every little moment we shared.
+So I wanted to leave them here,
+in a place you can always come back to.
 
-Some memories are captured in pictures,
-but the most beautiful ones
-live in our hearts.
+You are more than just a beautiful memory
+or a moment in my life.
 
-I hope we keep creating
-new chapters together.
+You are part of so many moments
+that I will always carry with me.
 
-Happy Birthday.`;
+The laughs.
+The conversations.
+The little things
+that probably seemed ordinary at the time...
+
+but somehow became unforgettable.
+
+I hope life gives you
+a thousand reasons to smile.
+
+And I hope, through every chapter,
+you always remember
+that there will always be someone
+who is proud of you,
+believes in you,
+and wishes the best for you.
+
+Happy Birthday, Nour.
+
+May this year be kinder,
+brighter,
+and full of moments
+worth remembering.
+
+Always,
+`;
 
 
 /* Current typing position */
