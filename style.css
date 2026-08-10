@@ -1,193 +1,223 @@
-*{
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
 
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*,
+*::before,
+*::after {
 
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
 }
 
 
+/* =========================================================
+   HTML + BODY
+========================================================= */
 
 html,
-body{
+body {
 
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 
-    overflow:hidden;
-
-}
-
-
-
-body{
-
-    background:#080808;
-
-    color:#f5f5f5;
-
-    font-family:'Poppins',sans-serif;
-
-}
-
-
-
-
-
-/* =========================
-   GRAIN
-========================= */
-
-
-#grain{
-
-    position:fixed;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    pointer-events:none;
-
-    background-image:url("assets/grain.png");
-
-    background-repeat:no-repeat;
-
-    background-size:cover;
-
-    background-position:center;
-
-    opacity:.12;
-
-    transition:opacity 1.5s ease;
-
-    z-index:999;
-
-}
-
-
-
-
-
-
-
-/* =========================
-   PAGES
-========================= */
-
-
-.page{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-
-    height:100dvh;
-
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-    background:#080808;
-
-
-    opacity:0;
-
-    visibility:hidden;
-
-
-    transition:
-
-    opacity 1.5s ease,
-
-    transform 1.5s ease;
-
-
-    transform:scale(1.03);
-
-}
-
-
-
-.page.active{
-
-
-    opacity:1;
-
-
-    visibility:visible;
-
-
-    transform:scale(1);
-
-
-}
-
-
-
-/* =========================
-   COUNTDOWN
-========================= */
-
-#countdownPage {
-    position: relative;
     overflow: hidden;
 
-    /* الصورة اللي عندك تفضل زي ما هي */
+    overscroll-behavior: none;
+
+    touch-action: manipulation;
 }
 
-/* طبقة خفيفة جدًا فوق الصورة */
-#countdownPage::before {
-    content: "";
+
+body {
+
+    background: #080808;
+
+    color: #f5f5f5;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+}
+
+
+/* =========================================================
+   GRAIN
+========================================================= */
+
+#grain {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    background-image:
+        url("assets/grain.png");
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    background-position: center;
+
+    opacity: .12;
+
+    transition:
+        opacity 1.5s ease;
+
+    z-index: 999;
+}
+
+
+/* =========================================================
+   PAGE SYSTEM
+========================================================= */
+
+.page {
+
     position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    max-width: 100vw;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    background: #080808;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: scale(1.03);
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease,
+        visibility 1.5s;
+}
+
+
+.page.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: scale(1);
+}
+
+
+/* =========================================================
+   GENERAL IMAGE / VIDEO SAFETY
+========================================================= */
+
+img,
+video,
+canvas,
+svg {
+
+    max-width: 100%;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+
+    max-width: 100%;
+
+    overflow-wrap: break-word;
+}
+
+
+/* =========================================================
+   COUNTDOWN PAGE
+========================================================= */
+
+#countdownPage {
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+#countdownPage::before {
+
+    content: "";
+
+    position: absolute;
+
     inset: 0;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(0, 0, 0, 0.05),
-            rgba(0, 0, 0, 0.45)
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.45)
         );
 
     pointer-events: none;
+
     z-index: 0;
 }
 
 
 .countdownBox {
+
     position: relative;
+
     z-index: 2;
 
     width: 90%;
-    max-width: 900px;
 
-    text-align: center;
+    max-width: 900px;
 
     padding: 20px;
 
-    animation: countdownEntrance 2s ease forwards;
+    text-align: center;
+
+    animation:
+        countdownEntrance 2s ease forwards;
 }
 
 
-/* الجملة الصغيرة */
-
 .comingText {
-    font-family: 'Cormorant Garamond', serif;
 
-    font-size: clamp(
-        1rem,
-        2.5vw,
-        1.4rem
-    );
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
-    color: rgba(255,255,255,.75);
+    font-size:
+        clamp(
+            1rem,
+            2.5vw,
+            1.4rem
+        );
+
+    color:
+        rgba(255,255,255,.75);
 
     letter-spacing: 4px;
 
@@ -197,72 +227,71 @@ body{
 }
 
 
-/* التاريخ */
-
 .date {
-    font-family: 'Cormorant Garamond', serif;
 
-    font-size: clamp(
-        2.5rem,
-        7vw,
-        4.8rem
-    );
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(
+            2.5rem,
+            7vw,
+            4.8rem
+        );
 
     font-weight: 500;
 
-    letter-spacing: clamp(
-        3px,
-        1vw,
-        8px
-    );
+    letter-spacing:
+        clamp(
+            3px,
+            1vw,
+            8px
+        );
 
     color: #d4af37;
 
     text-shadow:
-        0 0 10px rgba(212,175,55,.2),
-        0 0 30px rgba(212,175,55,.08);
+        0 0 10px
+        rgba(212,175,55,.2),
 
-    margin: 0;
+        0 0 30px
+        rgba(212,175,55,.08);
 }
 
-
-/* العداد */
 
 #countdown {
 
     margin-top: 28px;
 
-    font-size: clamp(
-        2.2rem,
-        10vw,
-        5.5rem
-    );
+    font-size:
+        clamp(
+            2.2rem,
+            10vw,
+            5.5rem
+        );
 
     font-weight: 300;
 
-    letter-spacing: clamp(
-        2px,
-        2vw,
-        12px
-    );
+    letter-spacing:
+        clamp(
+            2px,
+            2vw,
+            12px
+        );
 
     white-space: nowrap;
 
     color: #f5f5f5;
 
     text-shadow:
-        0 0 20px rgba(255,255,255,.08);
+        0 0 20px
+        rgba(255,255,255,.08);
 
-    font-variant-numeric: tabular-nums;
-
-    transition:
-        opacity .2s ease,
-        transform .2s ease;
+    font-variant-numeric:
+        tabular-nums;
 }
 
-
-
-/* الـLabels */
 
 .labels {
 
@@ -272,21 +301,24 @@ body{
 
     align-items: center;
 
-    gap: clamp(
-        12px,
-        4vw,
-        55px
-    );
+    gap:
+        clamp(
+            12px,
+            4vw,
+            55px
+        );
 
     margin-top: 15px;
 
-    color: rgba(255,255,255,.55);
+    color:
+        rgba(255,255,255,.55);
 
-    font-size: clamp(
-        8px,
-        2vw,
-        12px
-    );
+    font-size:
+        clamp(
+            8px,
+            2vw,
+            12px
+        );
 
     letter-spacing: 3px;
 
@@ -294,116 +326,90 @@ body{
 }
 
 
-/* دخول الصفحة */
-
 @keyframes countdownEntrance {
 
     from {
+
         opacity: 0;
-        transform: translateY(25px) scale(.98);
-        filter: blur(5px);
+
+        transform:
+            translateY(25px)
+            scale(.98);
+
+        filter:
+            blur(5px);
     }
 
     to {
+
         opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
 
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:
+            blur(0);
+    }
 }
 
 
-/* =========================
-   COUNTDOWN MOBILE
-========================= */
+/* =========================================================
+   GENERAL BUTTONS
+========================================================= */
 
-@media(max-width:600px) {
+button {
 
-    .countdownBox {
-        width: 96%;
-        padding: 10px;
-    }
+    padding:
+        13px 38px;
 
-    .comingText {
-        font-size: .85rem;
-        letter-spacing: 2.5px;
-        margin-bottom: 14px;
-    }
+    background:
+        transparent;
 
-    .date {
-        font-size: 2.7rem;
-        letter-spacing: 4px;
-    }
+    color: white;
 
-    #countdown {
-        margin-top: 22px;
+    border:
+        1px solid #555;
 
-        font-size: 2.1rem;
+    border-radius: 40px;
 
-        letter-spacing: 3px;
-    }
+    cursor: pointer;
 
-    .labels {
-        gap: 12px;
-        font-size: 8px;
-        letter-spacing: 1.5px;
-    }
+    font-family:
+        'Poppins',
+        sans-serif;
 
+    font-size: 16px;
+
+    transition:
+        .4s ease;
 }
 
 
-/* شاشات الموبايل الصغيرة */
+button:hover {
 
-@media(max-width:380px) {
+    border-color: #d4af37;
 
-    .comingText {
-        font-size: .75rem;
-    }
-
-    .date {
-        font-size: 2.3rem;
-    }
-
-    #countdown {
-        font-size: 1.7rem;
-        letter-spacing: 1px;
-    }
-
-    .labels {
-        gap: 7px;
-        font-size: 7px;
-    }
-
+    color: #d4af37;
 }
-
-
-
-/* =========================
-   VIDEO
-========================= */
-
-#videoPage{
-
-    background:#000;
-
-    overflow:hidden;
-
-}
-
-
-
-/* =========================
-   VIDEO
-========================= */
+/* =========================================================
+   VIDEO PAGE
+========================================================= */
 
 #videoPage {
+
     background: #000;
+
     overflow: hidden;
+
     padding: 0;
 }
 
+
 #introVideo {
+
     position: absolute;
+
     inset: 0;
 
     width: 100%;
@@ -416,1700 +422,1617 @@ body{
     background: #000;
 }
 
-/* =========================
-   MOBILE VIDEO
-========================= */
 
-@media (max-width: 600px) {
+/* =========================================================
+   VIDEO PLAY BUTTON
+========================================================= */
 
-    #videoPage {
-        width: 100%;
-        height: 100dvh;
+#playBtn {
 
-        overflow: hidden;
+    position: absolute;
 
-        /* منع أي حركة بسبب الـ viewport */
-        position: fixed;
-        inset: 0;
-    }
+    z-index: 20;
 
-    #introVideo {
-        position: absolute;
-        inset: 0;
+    padding:
+        15px 45px;
 
-        width: 100%;
-        height: 100dvh;
+    border:
+        1px solid
+        rgba(255,255,255,.5);
 
-        object-fit: cover;
-
-        max-width: none;
-        max-height: none;
-
-        transform: none;
-    }
-}
-
-
-
-
-#playBtn{
-
-
-    position:absolute;
-
-
-    z-index:20;
-
-
-    padding:15px 45px;
-
-
-    border-radius:50px;
-
-
-    border:1px solid rgba(255,255,255,.5);
-
-
-    background:rgba(0,0,0,.35);
-
-
-    backdrop-filter:blur(10px);
-
-
-    color:white;
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    font-size:22px;
-
-
-    letter-spacing:2px;
-
-
-    cursor:pointer;
-
-
-    transition:1s ease;
-
-
-}
-
-
-
-
-#playBtn:hover{
-
-
-    background:#d4af37;
-
-
-    color:#000;
-
-
-}
-
-
-
-
-#playBtn.hide{
-
-
-    opacity:0;
-
-
-    transform:scale(.8);
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-
-#videoMessage{
-
-
-    position:absolute;
-
-
-    inset:0;
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-    text-align:center;
-
-
-    padding:20px;
-
+    border-radius: 50px;
 
     background:
+        rgba(0,0,0,.35);
 
-    radial-gradient(
+    backdrop-filter:
+        blur(10px);
 
-    circle,
+    color: white;
 
-    rgba(0,0,0,.2),
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
-    rgba(0,0,0,.75)
+    font-size: 22px;
 
-    );
+    letter-spacing: 2px;
 
+    cursor: pointer;
 
-    opacity:0;
-
-
-    pointer-events:none;
-
-
-    transition:2s ease;
-
-
+    transition:
+        1s ease;
 }
 
 
+#playBtn:hover {
 
+    background: #d4af37;
 
-
-#videoMessage h1{
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    font-size:clamp(2rem,6vw,4rem);
-
-
-    line-height:1.3;
-
-
-    max-width:800px;
-
-
-}
-/* =========================
-   QUOTE
-========================= */
-
-
-.quote{
-
-
-    width:90%;
-
-
-    text-align:center;
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
+    color: #000;
 }
 
 
+#playBtn.hide {
 
-.quote .line{
-
-
-    opacity:0;
-
-
-    font-size:clamp(1.8rem,6vw,4rem);
-
-
-    line-height:1.4;
-
-
-    margin:20px 0;
-
-
-    letter-spacing:1px;
-
-
-}
-
-
-
-#heart{
-
-
-    margin-top:40px;
-
-
-    font-size:50px;
-
-
-    opacity:0;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
-   VINTAGE LETTER
-========================= */
-
-
-#letterPage{
-
-    background:
-    radial-gradient(
-        circle,
-        rgba(212,175,55,.12),
-        transparent 60%
-    );
-
-}
-
-
-
-.letterBox{
-
-
-    width:min(90%,700px);
-
-
-    padding:45px 55px;
-
-
-    background:
-
-    linear-gradient(
-
-        135deg,
-
-        #fff7df,
-
-        #ead7aa
-
-    );
-
-
-    color:#3a2a1a;
-
-
-    border-radius:4px;
-
-
-    position:relative;
-
-
-    box-shadow:
-
-    0 30px 80px rgba(0,0,0,.7);
-
+    opacity: 0;
 
     transform:
-
-    translateY(40px)
-
-    scale(.95);
-
-
-    animation:letterOpen 1.5s ease forwards;
-
-
-}
-
-
-
-@keyframes letterOpen{
-
-
-    from{
-
-        opacity:0;
-
-        transform:
-
-        translateY(80px)
-
         scale(.8);
 
-        filter:blur(8px);
-
-    }
-
-
-
-    to{
-
-        opacity:1;
-
-        transform:
-
-        translateY(0)
-
-        scale(1);
-
-        filter:blur(0);
-
-    }
-
-
+    pointer-events: none;
 }
 
 
+/* =========================================================
+   VIDEO MESSAGE
+========================================================= */
 
+#videoMessage {
 
-.letterBox::before{
+    position: absolute;
 
+    inset: 0;
 
-    content:"";
+    display: flex;
 
+    justify-content: center;
 
-    position:absolute;
+    align-items: center;
 
+    text-align: center;
 
-    inset:12px;
-
-
-    border:1px solid rgba(100,70,30,.25);
-
-
-    pointer-events:none;
-
-
-}
-
-
-
-
-
-.letterBox h2{
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    color:#8c6727;
-
-
-    font-size:clamp(2.2rem,6vw,4rem);
-
-
-    margin-bottom:30px;
-
-
-}
-
-
-
-
-
-#typing{
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    color:#3a2a1a;
-
-
-    font-size:clamp(1.2rem,3vw,1.6rem);
-
-
-    line-height:1.9;
-
-
-    min-height:240px;
-
-
-    text-align:left;
-
-
-}
-
-
-
-
-
-.letterBox .next{
-
-    opacity:0;
-
-    transition:1s ease;
-
-}
-
-
-
-.letterBox .next:hover{
-
-
-    background:#d4af37;
-
-
-    color:#000;
-
-
-}
-
-
-
-
-
-
-/* =========================
-   BUTTONS GENERAL
-========================= */
-
-
-button{
-
-
-    padding:13px 38px;
-
-
-    background:transparent;
-
-
-    color:white;
-
-
-    border:1px solid #555;
-
-
-    border-radius:40px;
-
-
-    cursor:pointer;
-
-
-    font-size:16px;
-
-
-    transition:.4s;
-
-
-}
-
-
-
-button:hover{
-
-
-    border-color:#d4af37;
-
-
-    color:#d4af37;
-
-
-}/* =========================
-   MEMORY WALL BASE
-========================= */
-
-
-#memoryPage{
-
-
-    overflow:hidden;
-
-
-    background:#080808;
-
-
-}
-
-
-
-
-
-.memoryBackground{
-
-
-    position:absolute;
-
-
-    inset:0;
-
+    padding: 20px;
 
     background:
+        radial-gradient(
+            circle,
+            rgba(0,0,0,.2),
+            rgba(0,0,0,.75)
+        );
 
+    opacity: 0;
 
-    radial-gradient(
+    pointer-events: none;
 
-        circle at center,
-
-        rgba(212,175,55,.15),
-
-        transparent 60%
-
-    );
-
-
+    transition:
+        2s ease;
 }
 
 
+#videoMessage h1 {
 
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
+    font-size:
+        clamp(
+            2rem,
+            6vw,
+            4rem
+        );
 
-.rope{
+    line-height: 1.3;
 
-
-    position:absolute;
-
-
-    width:80%;
-
-
-    height:2px;
-
-
-    left:10%;
-
-
-    background:rgba(255,255,255,.25);
-
-
-    animation:ropeMove 6s ease-in-out infinite;
-
-
+    max-width: 800px;
 }
 
 
+/* =========================================================
+   QUOTE PAGE
+========================================================= */
 
+.quote {
 
+    width: 90%;
 
-.rope1{
+    text-align: center;
 
-
-    top:25%;
-
-
+    font-family:
+        'Cormorant Garamond',
+        serif;
 }
 
 
+.quote .line {
 
+    opacity: 0;
 
+    font-size:
+        clamp(
+            1.8rem,
+            6vw,
+            4rem
+        );
 
-.rope2{
+    line-height: 1.4;
 
+    margin: 20px 0;
 
-    bottom:25%;
+    letter-spacing: 1px;
 
-
+    transition:
+        opacity 1.5s ease;
 }
 
 
+#heart {
 
+    margin-top: 40px;
 
+    font-size: 50px;
 
-@keyframes ropeMove{
+    opacity: 0;
 
-
-    0%,100%{
-
-
-        transform:rotate(-1deg);
-
-
-    }
-
-
-
-    50%{
-
-
-        transform:rotate(1deg);
-
-
-    }
-
-
+    transition:
+        opacity 2s ease;
 }
 
 
+/* =========================================================
+   LETTER PAGE
+========================================================= */
+
+#letterPage {
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212,175,55,.12),
+            transparent 60%
+        );
+}
 
 
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope-wrapper {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
 
 
+.envelope {
+
+    position: relative;
+
+    width: 300px;
+
+    height: 200px;
+
+    perspective: 1000px;
+}
 
 
-/* =========================
-   MEMORY PHOTOS
-========================= */
+.envelope-body {
 
+    position: absolute;
 
-.memory{
+    inset: 0;
 
+    background:
+        linear-gradient(
+            145deg,
+            #6f4828,
+            #3c2415
+        );
 
-    position:absolute;
+    border:
+        2px solid #b8894a;
 
-
-    width:170px;
-
-
-    height:220px;
-
-
-    background:#fff;
-
-
-    padding:10px;
-
+    border-radius: 8px;
 
     box-shadow:
+        0 25px 50px
+        rgba(0,0,0,.65);
 
-
-    0 20px 40px rgba(0,0,0,.5);
-
-
-    transform-origin:top center;
-
-
-    animation:sway 6s ease-in-out infinite;
-
-
+    overflow: hidden;
 }
 
 
+.envelope-body::before {
 
+    content: "";
 
+    position: absolute;
 
-.memory img{
+    inset: 10px;
 
+    border:
+        1px solid
+        rgba(212,175,55,.35);
 
-    width:100%;
+    border-radius: 4px;
 
-
-    height:100%;
-
-
-    object-fit:cover;
-
-
+    pointer-events: none;
 }
 
 
+/* =========================================================
+   ENVELOPE FLAP
+========================================================= */
 
+.envelope-flap {
 
+    position: absolute;
 
-.clip{
+    top: 0;
+    left: 0;
 
+    width: 100%;
+    height: 105px;
 
-    position:absolute;
-
-
-    top:-18px;
-
-
-    left:50%;
-
-
-    transform:translateX(-50%);
-
-
-    width:25px;
-
-
-    height:35px;
-
-
-    background:#b8894a;
-
-
-    border-radius:5px;
-
-
-    z-index:2;
-
-
-}
-
-
-
-
-
-@keyframes sway{
-
-
-    0%,100%{
-
-
-        transform:rotate(-3deg);
-
-
-    }
-
-
-
-    50%{
-
-
-        transform:rotate(3deg);
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   MEMORY POSITIONS
-========================= */
-
-
-.memory1{
-
-
-    top:18%;
-
-
-    left:12%;
-
-
-}
-
-
-
-.memory2{
-
-
-    top:15%;
-
-
-    left:35%;
-
-
-}
-
-
-
-.memory3{
-
-
-    top:20%;
-
-
-    right:12%;
-
-
-}
-
-
-
-.memory4{
-
-
-    bottom:18%;
-
-
-    left:18%;
-
-
-}
-
-
-
-.memory5{
-
-
-    bottom:15%;
-
-
-    left:42%;
-
-
-}
-
-
-
-.memory6{
-
-
-    bottom:20%;
-
-
-    right:15%;
-
-
-}
-
-
-
-
-
-.memory7{
-
-
-    top:45%;
-
-
-    left:5%;
-
-
-}
-
-
-
-
-
-.memory8{
-
-
-    top:45%;
-
-
-    right:5%;
-
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   MEMORY TEXT
-========================= */
-
-
-.memoryText{
-
-
-    position:absolute;
-
-
-    z-index:20;
-
-
-    width:85%;
-
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-.memoryText::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    inset:-40px;
-
+    z-index: 5;
 
     background:
+        linear-gradient(
+            145deg,
+            #8a5b32,
+            #4b2d1a
+        );
 
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
 
-    radial-gradient(
+    transform-origin:
+        top center;
 
-        circle,
-
-        rgba(0,0,0,.85),
-
-        transparent 70%
-
-    );
-
-
-    filter:blur(20px);
-
-
-    z-index:-1;
-
-
+    transition:
+        transform 1.3s
+        cubic-bezier(.2,.8,.2,1);
 }
 
 
-/* =========================
-   MEMORY PHOTOS HOVER
-========================= */
+/* =========================================================
+   ENVELOPE TITLE
+========================================================= */
 
-/* لما نقف على أي صورة */
-.memory:hover {
-    transform: scale(1.1) rotate(0deg) !important; /* تكبر وتتعدل */
-    z-index: 50; /* تطلع فوق كل حاجة */
-    box-shadow: 0 10px 50px rgba(212, 175, 55, 0.6); /* جلو ذهبي */
-    border-color: #d4af37; /* الإطار يقلب ذهبي */
+.envelope-title {
+
+    position: absolute;
+
+    left: 50%;
+    top: 48%;
+
+    transform:
+        translate(-50%,-50%);
+
+    text-align: center;
+
+    color: #d4af37;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    z-index: 2;
 }
 
-/* لما نقف على صورة، باقي الصور تتطفي */
-#memoryPage:has(.memory:hover) .memory:not(:hover) {
-    opacity: 0.3 !important;
-    filter: blur(2px) grayscale(50%);
+
+.envelope-title span {
+
+    display: block;
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    color:
+        rgba(255,255,255,.65);
 }
 
-/* الـ Clips كمان تتفاعل */
-.memory:hover .clip {
+
+.envelope-title strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 25px;
+
+    font-weight: 500;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+.wax-seal {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -25px;
+
+    transform:
+        translateX(-50%);
+
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d45b5b,
+            #781c1c 60%,
+            #420b0b
+        );
+
+    border:
+        2px solid #d4af37;
+
+    color: #f4d98a;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 8px 18px
+        rgba(0,0,0,.5);
+
+    z-index: 10;
+
+    transition:
+        transform .7s ease,
+        opacity .7s ease;
+}
+
+
+/* =========================================================
+   ENVELOPE HINT
+========================================================= */
+
+.envelope-click-hint {
+
+    margin-top: 35px;
+
+    color: #d4af37;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 1.35rem;
+
+    letter-spacing: 2px;
+
+    transition:
+        opacity .6s ease;
+}
+
+/* =========================================================
+   ENVELOPE OPEN ANIMATION
+========================================================= */
+
+.envelope-wrapper.opening
+.envelope-flap {
+
+    transform:
+        rotateX(180deg);
+}
+
+
+.envelope-wrapper.opening
+.wax-seal {
+
+    transform:
+        translateX(-50%)
+        scale(.4);
+
+    opacity: 0;
+}
+
+
+.envelope-wrapper.opening
+.envelope-click-hint {
+
+    opacity: 0;
+}
+
+
+/* =========================================================
+   LETTER CONTAINER
+========================================================= */
+
+/*
+    IMPORTANT:
+
+    letterBox is completely hidden
+    until JavaScript adds .show-letter.
+*/
+
+.letterBox {
+
+    width:
+        min(90%, 700px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.letterBox.hidden-letter {
+
+    display: none;
+}
+
+
+.letterBox.show-letter {
+
+    display: flex;
+
+    animation:
+        letterAppear 1.3s ease forwards;
+}
+
+
+/* =========================================================
+   ACTUAL LETTER PAPER
+========================================================= */
+
+.letter-paper {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 520px;
+
+    padding:
+        55px 60px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8e7,
+            #ead7aa
+        );
+
+    color: #3a2a1a;
+
+    border-radius: 4px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.7);
+
+    overflow: hidden;
+}
+
+
+.letter-paper::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 14px;
+
+    border:
+        1px solid
+        rgba(100,70,30,.25);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LETTER TITLE
+========================================================= */
+
+.letter-paper h2 {
+
+    position: relative;
+
+    margin:
+        0 0 30px;
+
+    text-align: center;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(
+            2.2rem,
+            6vw,
+            4rem
+        );
+
+    font-weight: 600;
+
+    color: #8c6727;
+}
+
+
+/* =========================================================
+   TYPING AREA
+========================================================= */
+
+#typing {
+
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+
+    min-height: 260px;
+
+    margin: 0;
+
+    text-align: left;
+
+    /*
+        Preserve line breaks from
+        the letterText string.
+    */
+
+    white-space: pre-line;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(
+            1.2rem,
+            3vw,
+            1.6rem
+        );
+
+    line-height: 1.9;
+
+    color: #3a2a1a;
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+.letter-paper .next {
+
+    display: block;
+
+    margin:
+        25px auto 0;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    border:
+        1px solid #8c6727;
+
+    color: #6b4b25;
+
+    background: transparent;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size: 17px;
+
+    padding:
+        11px 35px;
+
+    border-radius: 30px;
+
+    transition:
+        .4s ease;
+}
+
+
+.letter-paper .next:hover {
+
     background: #d4af37;
-    transform: translateX(-50%) scale(1.1);
+
+    color: #000;
+
+    border-color: #d4af37;
 }
 
 
+/* =========================================================
+   LETTER APPEAR
+========================================================= */
 
-#memoryQuote{
+@keyframes letterAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(50px)
+            scale(.94);
+
+        filter:
+            blur(8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+        filter:
+            blur(0);
+    }
+}
 
 
-    font-family:'Cormorant Garamond',serif;
+/* =========================================================
+   MEMORY PAGE
+========================================================= */
+
+#memoryPage {
+
+    overflow: hidden;
+
+    background: #080808;
+}
 
 
-    font-size:clamp(2rem,5vw,4rem);
+.memoryBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(212,175,55,.15),
+            transparent 60%
+        );
+}
 
 
-    line-height:1.4;
+.rope {
+
+    position: absolute;
+
+    width: 80%;
+
+    height: 2px;
+
+    left: 10%;
+
+    background:
+        rgba(255,255,255,.25);
+
+    animation:
+        ropeMove 6s ease-in-out infinite;
+}
 
 
-    color:#d4af37;
+.rope1 {
+    top: 25%;
+}
 
+
+.rope2 {
+    bottom: 25%;
+}
+
+
+@keyframes ropeMove {
+
+    0%,
+    100% {
+        transform:
+            rotate(-1deg);
+    }
+
+    50% {
+        transform:
+            rotate(1deg);
+    }
+}
+
+
+/* =========================================================
+   MEMORY PHOTOS
+========================================================= */
+
+.memory {
+
+    position: absolute;
+
+    width: 170px;
+    height: 220px;
+
+    background: #fff;
+
+    padding: 10px;
+
+    box-shadow:
+        0 20px 40px
+        rgba(0,0,0,.5);
+
+    transform-origin:
+        top center;
+
+    animation:
+        sway 6s ease-in-out infinite;
+
+    transition:
+        opacity .4s ease,
+        filter .4s ease,
+        box-shadow .4s ease;
+}
+
+
+.memory img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.clip {
+
+    position: absolute;
+
+    top: -18px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 25px;
+    height: 35px;
+
+    background: #b8894a;
+
+    border-radius: 5px;
+
+    z-index: 2;
+
+    transition:
+        .3s ease;
+}
+
+
+@keyframes sway {
+
+    0%,
+    100% {
+        transform:
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            rotate(3deg);
+    }
+}
+
+
+/* =========================================================
+   MEMORY POSITIONS
+========================================================= */
+
+.memory1 {
+    top: 18%;
+    left: 12%;
+}
+
+
+.memory2 {
+    top: 15%;
+    left: 35%;
+}
+
+
+.memory3 {
+    top: 20%;
+    right: 12%;
+}
+
+
+.memory4 {
+    bottom: 18%;
+    left: 18%;
+}
+
+
+.memory5 {
+    bottom: 15%;
+    left: 42%;
+}
+
+
+.memory6 {
+    bottom: 20%;
+    right: 15%;
+}
+
+
+.memory7 {
+    top: 45%;
+    left: 5%;
+}
+
+
+.memory8 {
+    top: 45%;
+    right: 5%;
+}
+
+/* =========================================================
+   MEMORY TEXT
+========================================================= */
+
+.memoryText {
+
+    position: absolute;
+
+    z-index: 20;
+
+    width: 85%;
+
+    text-align: center;
+}
+
+
+.memoryText::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -40px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,0,0,.85),
+            transparent 70%
+        );
+
+    filter:
+        blur(20px);
+
+    z-index: -1;
+}
+
+
+#memoryQuote {
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(
+            2rem,
+            5vw,
+            4rem
+        );
+
+    line-height: 1.4;
+
+    color: #d4af37;
 
     text-shadow:
+        0 0 20px
+        rgba(0,0,0,.8);
 
-
-    0 0 20px rgba(0,0,0,.8);
-
-
-    transition:2s ease;
-
-
+    transition:
+        opacity 1.5s ease;
 }
-/* =========================
+
+
+/* =========================================================
+   MEMORY HOVER
+========================================================= */
+
+.memory:hover {
+
+    transform:
+        scale(1.1)
+        rotate(0deg) !important;
+
+    z-index: 50;
+
+    box-shadow:
+        0 10px 50px
+        rgba(212,175,55,.6);
+}
+
+
+#memoryPage:has(.memory:hover)
+.memory:not(:hover) {
+
+    opacity: .3 !important;
+
+    filter:
+        blur(2px)
+        grayscale(50%);
+}
+
+
+.memory:hover .clip {
+
+    background: #d4af37;
+
+    transform:
+        translateX(-50%)
+        scale(1.1);
+}
+
+
+/* =========================================================
    QUESTION PAGE
-========================= */
+========================================================= */
 
+.questionBox {
 
-.questionBox{
+    width: 90%;
 
+    max-width: 900px;
 
-    width:90%;
-
-
-    max-width:900px;
-
-
-    text-align:center;
-
-
+    text-align: center;
 }
 
 
+.questionBox h1 {
 
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
+    font-weight: 500;
 
-.questionBox h1{
+    font-size:
+        clamp(
+            2rem,
+            6vw,
+            4rem
+        );
 
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    font-weight:500;
-
-
-    font-size:clamp(2rem,6vw,4rem);
-
-
-    line-height:1.4;
-
-
+    line-height: 1.4;
 }
 
 
+.buttons {
 
-
-
-
-.buttons{
     margin-top: 50px;
+
     position: relative;
+
     width: 100%;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
-    gap: 30px; /* المسافة بين الزرارين */
+
+    gap: 30px;
+
     min-height: 200px;
 }
 
-#yes, #no {
-    position: relative; /* خليهم يترتبوا جنب بعض طبيعي */
-    left: auto;
-    top: auto;
-    transform: none;
-    padding: 15px 45px;
+
+#yes,
+#no {
+
+    position: relative;
+
+    padding:
+        15px 45px;
+
     font-size: 18px;
+
     border-radius: 50px;
+
     cursor: pointer;
+
     white-space: nowrap;
 }
 
+
 #yes {
+
     background: #d4af37;
+
     color: #000;
+
     border: none;
+
     font-weight: 600;
-    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+
+    box-shadow:
+        0 0 20px
+        rgba(212,175,55,.4);
 }
 
+
 #no {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.3);
+
     color: white;
+
+    transition:
+        left .15s ease-out,
+        top .15s ease-out,
+        transform .2s ease;
 }
 
-/* تنسيق النص جوه زرار No */
+
 #no .no-text {
-    pointer-events: none; /* عشان الماوس يشوف الزرار مش النص */
-    transition: opacity 0.3s ease;
-}
 
-/* إضافة Transition ناعم لحركة الزرار */
-#no {
-    transition: left 0.15s ease-out, top 0.15s ease-out, transform 0.2s ease;
-    will-change: left, top, transform; /* تحسين الأداء */
+    pointer-events: none;
+
+    transition:
+        opacity .3s ease;
 }
 
 
-
-
-
-
-
-
-
-/* =========================
+/* =========================================================
    FINAL PAGE
-========================= */
-
-
-.finalScene{
-
-
-    width:90%;
-
-
-    text-align:center;
-
-
-}
-
-
-
-
-
-.finalLine{
-
-
-    opacity:0;
-
-
-    transform:translateY(40px);
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-}
-
-
-
-
-
-.finalLine.one{
-
-
-    font-size:clamp(2rem,6vw,4rem);
-
-
-}
-
-
-
-
-
-.finalLine.two{
-
-
-    margin-top:40px;
-
-
-    color:#ddd;
-
-
-    font-size:clamp(2rem,6vw,4rem);
-
-
-}
-
-
-
-
-
-.finalLine.three{
-
-
-    margin-top:50px;
-
-
-    color:#d4af37;
-
-
-    font-size:clamp(3rem,8vw,6rem);
-
-
-}
-
-
-
-
-
-
-
-.finalMessage{
-
-
-    margin-top:50px;
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    font-size:clamp(1.3rem,4vw,2rem);
-
-
-    line-height:2;
-
-
-    color:#ddd;
-
-
-    opacity:0;
-
-
-}
-
-
-
-
-
-
-
-.finalLast{
-
-
-    margin-top:60px;
-
-
-    font-family:'Cormorant Garamond',serif;
-
-
-    font-size:clamp(1.8rem,5vw,3rem);
-
-
-    color:#d4af37;
-
-
-    opacity:0;
-
-
-}
-
-
-
-
-
-
-.finalShow{
-
-
-    animation:finalAppear 2s ease forwards;
-
-
-}
-
-
-
-
-
-@keyframes finalAppear{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:translateY(40px);
-
-
-        filter:blur(10px);
-
-
-    }
-
-
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:translateY(0);
-
-
-        filter:blur(0);
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-/* =========================
-   MOBILE
-========================= */
-
-
-@media(max-width:600px){
-
-
-
-    .page{
-
-
-        padding:15px;
-
-
-    }
-
-
-
-    #introVideo{
-
-
-        object-fit:contain;
-
-
-    }
-
-
-
-
-
-    .memory{
-
-
-        width:95px;
-
-
-        height:125px;
-
-
-        padding:6px;
-
-
-    }
-
-
-
-
-
-    .clip{
-
-
-        width:15px;
-
-
-        height:25px;
-
-
-        top:-12px;
-
-
-    }
-
-
-
-
-
-    .memory7,
-    .memory8{
-
-
-        display:none;
-
-
-    }
-
-
-
-
-
-    #memoryQuote{
-
-
-        font-size:2rem;
-
-
-    }
-
-
-
-
-
-    .questionBox h1{
-
-
-        font-size:2rem;
-
-
-    }
-
-
-
-
-    #yes,
-    #no{
-
-
-        padding:12px 28px;
-
-
-        font-size:15px;
-
-
-    }
-
-
-
-
-
-    .finalLine.one,
-    .finalLine.two{
-
-
-        font-size:2rem;
-
-
-    }
-
-
-
-
-
-    .finalLine.three{
-
-
-        font-size:3rem;
-
-
-    }
-
-
-
-}
-
-
-
-
-@media(max-width:380px){
-
-
-
-    .memory{
-
-
-        width:80px;
-
-
-        height:110px;
-
-
-    }
-
-
-
-
-    #memoryQuote{
-
-
-        font-size:1.6rem;
-
-
-    }
-
-
-
-}
-
-/* =========================
-   NEW FINAL PAGE ROMANCE
-========================= */
+========================================================= */
 
 #finalPage {
+
     background:
-    radial-gradient(
-        circle at center,
-        rgba(30, 20, 10, 1), /* دافئ */
-        #000 70%
-    );
+        radial-gradient(
+            circle at center,
+            #1e140a,
+            #000 70%
+        );
 }
 
-/* مطر القلوب الذهبية */
+
 #heartsRain {
+
     position: absolute;
+
     inset: 0;
+
     width: 100%;
     height: 100%;
+
     pointer-events: none;
+
     z-index: 1;
+
+    overflow: hidden;
 }
+
 
 .heart-drop {
+
     position: absolute;
-    color: rgba(212, 175, 55, 0.5); /* ذهبي خفيف */
+
+    top: -10vh;
+
+    color:
+        rgba(212,175,55,.5);
+
     font-size: 20px;
+
     user-select: none;
-    animation: heartFall linear infinite;
+
+    animation:
+        heartFall linear forwards;
 }
+
 
 @keyframes heartFall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+
+    0% {
+
+        transform:
+            translateY(-10vh)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
 }
 
 
-/* تنسيق النصوص الجديد */
 .finalScene {
-    z-index: 5; /* فوق المطر */
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 90%;
+
+    text-align: center;
 }
 
-.white-heart {
-    display: inline-block;
-    animation: heartBeat 2s infinite;
-}
 
-@keyframes heartBeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
+.finalLine {
 
-/* تجميع الرسايل عشان تظهر مع بعض */
-.finalMessageBlock {
-    margin-top: 50px;
     opacity: 0;
-    transition: opacity 2s ease;
+
+    transform:
+        translateY(40px);
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
 }
 
-.finalMessageBlock.finalShow {
-    opacity: 1;
+
+.finalLine.one {
+
+    font-size:
+        clamp(
+            2rem,
+            6vw,
+            4rem
+        );
 }
+
+
+.finalLine.two {
+
+    margin-top: 40px;
+
+    color: #ddd;
+
+    font-size:
+        clamp(
+            2rem,
+            6vw,
+            4rem
+        );
+}
+
+
+.finalLine.three {
+
+    margin-top: 50px;
+
+    color: #d4af37;
+
+    font-size:
+        clamp(
+            3rem,
+            8vw,
+            6rem
+        );
+}
+
+
+.finalMessageBlock {
+
+    margin-top: 50px;
+
+    opacity: 0;
+
+    transition:
+        opacity 2s ease;
+}
+
 
 .finalMessage {
-    margin-top: 20px; /* تباعد أقل جوه البلوك */
-    opacity: 1 !important; /* بتعتمد ع البلوك */
+
+    margin-top: 20px;
+
+    font-family:
+        'Cormorant Garamond',
+        serif;
+
+    font-size:
+        clamp(
+            1.3rem,
+            4vw,
+            2rem
+        );
+
+    line-height: 2;
+
+    color: #ddd;
 }
 
+
 .love-you {
-    font-size: clamp(1.8rem, 5vw, 3rem);
+
+    font-size:
+        clamp(
+            1.8rem,
+            5vw,
+            3rem
+        );
+
     color: #fff;
+
     margin-top: 40px;
 }
 
-/* =========================
-   ENVELOPE STYLES
-========================= */
-.envelope-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.5s ease, opacity 0.8s ease;
-    z-index: 10;
-}
 
-.envelope-wrapper:hover {
-    transform: scale(1.05);
-}
+.finalLast {
 
-.envelope {
-    width: 280px;
-    height: 180px;
-    background: #e2c99b;
-    border: 2px solid #b8894a;
-    border-radius: 8px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-}
+    margin-top: 60px;
 
-.wax-seal {
-    font-size: 45px;
-    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
-    animation: pulseSeal 2s infinite ease-in-out;
-}
+    font-family:
+        'Cormorant Garamond',
+        serif;
 
-@keyframes pulseSeal {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.15); }
-}
+    font-size:
+        clamp(
+            1.8rem,
+            5vw,
+            3rem
+        );
 
-.envelope-click-hint {
-    margin-top: 25px;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
     color: #d4af37;
-    letter-spacing: 1px;
-}
 
-.hidden-letter {
-    display: none;
     opacity: 0;
 }
 
-.show-letter {
-    display: block !important;
-    animation: letterOpen 1.2s ease forwards !important;
+
+.finalShow {
+
+    animation:
+        finalAppear 2s ease forwards;
 }
 
 
-/* =========================
-   GLOBAL NO-SCROLL SYSTEM
-========================= */
+.finalMessageBlock.finalShow {
 
-html,
-body {
-    width: 100%;
-    height: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    overflow: hidden;
-
-    overscroll-behavior: none;
-    touch-action: manipulation;
+    opacity: 1;
 }
 
 
-/* منع أي عنصر من توسيع الصفحة */
+@keyframes finalAppear {
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+    from {
 
+        opacity: 0;
 
-/* كل صفحة = شاشة كاملة */
+        transform:
+            translateY(40px);
 
-.page {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    max-width: 100vw;
-
-    height: 100dvh;
-    min-height: 100dvh;
-    max-height: 100dvh;
-
-    overflow: hidden;
-
-    margin: 0;
-}
-
-
-/* منع العناصر العريضة من عمل Horizontal Scroll */
-
-img,
-video,
-canvas,
-svg {
-    max-width: 100%;
-}
-
-
-/* حماية النصوص الطويلة */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-    max-width: 100%;
-
-    overflow-wrap: break-word;
-}
-
-
-/* الموبايل */
-
-@media (max-width: 600px) {
-
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-
-        overflow: hidden;
-
-        position: fixed;
-
-        inset: 0;
+        filter:
+            blur(10px);
     }
 
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+        filter:
+            blur(0);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px) {
 
     .page {
-        width: 100vw;
-        height: 100dvh;
 
-        min-height: 100dvh;
-        max-height: 100dvh;
+        padding: 15px;
+    }
 
-        overflow: hidden;
+
+    #introVideo {
+
+        object-fit: contain;
+    }
+
+
+    .countdownBox {
+
+        width: 96%;
+
+        padding: 10px;
+    }
+
+
+    .comingText {
+
+        font-size: .85rem;
+
+        letter-spacing: 2.5px;
+
+        margin-bottom: 14px;
+    }
+
+
+    .date {
+
+        font-size: 2.7rem;
+
+        letter-spacing: 4px;
+    }
+
+
+    #countdown {
+
+        margin-top: 22px;
+
+        font-size: 2.1rem;
+
+        letter-spacing: 3px;
+    }
+
+
+    .labels {
+
+        gap: 12px;
+
+        font-size: 8px;
+
+        letter-spacing: 1.5px;
+    }
+
+
+    /* Envelope */
+
+    .envelope {
+
+        width: 270px;
+
+        height: 180px;
+    }
+
+
+    .envelope-title strong {
+
+        font-size: 21px;
+    }
+
+
+    .envelope-click-hint {
+
+        font-size: 1.15rem;
+    }
+
+
+    /* Letter */
+
+    .letter-paper {
+
+        min-height: 500px;
+
+        padding:
+            40px 28px;
+    }
+
+
+    .letter-paper h2 {
+
+        font-size: 2.5rem;
+
+        margin-bottom: 25px;
+    }
+
+
+    #typing {
+
+        font-size: 1.25rem;
+
+        line-height: 1.8;
+
+        min-height: 280px;
+    }
+
+
+    /* Memories */
+
+    .memory {
+
+        width: 95px;
+
+        height: 125px;
+
+        padding: 6px;
+    }
+
+
+    .clip {
+
+        width: 15px;
+
+        height: 25px;
+
+        top: -12px;
+    }
+
+
+    .memory7,
+    .memory8 {
+
+        display: none;
+    }
+
+
+    #memoryQuote {
+
+        font-size: 2rem;
+    }
+
+
+    /* Question */
+
+    .questionBox h1 {
+
+        font-size: 2rem;
+    }
+
+
+    #yes,
+    #no {
+
+        padding:
+            12px 28px;
+
+        font-size: 15px;
+    }
+
+
+    /* Final */
+
+    .finalLine.one,
+    .finalLine.two {
+
+        font-size: 2rem;
+    }
+
+
+    .finalLine.three {
+
+        font-size: 3rem;
     }
 }
 
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:380px) {
+
+    .comingText {
+
+        font-size: .75rem;
+    }
+
+
+    .date {
+
+        font-size: 2.3rem;
+    }
+
+
+    #countdown {
+
+        font-size: 1.7rem;
+
+        letter-spacing: 1px;
+    }
+
+
+    .labels {
+
+        gap: 7px;
+
+        font-size: 7px;
+    }
+
+
+    .envelope {
+
+        width: 245px;
+
+        height: 165px;
+    }
+
+
+    .memory {
+
+        width: 80px;
+
+        height: 110px;
+    }
+
+
+    #memoryQuote {
+
+        font-size: 1.6rem;
+    }
+}

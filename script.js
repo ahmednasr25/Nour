@@ -1,512 +1,501 @@
-/* =========================
+/* =========================================================
    ELEMENTS
-========================= */
-
+========================================================= */
 
 const countdownPage =
-document.getElementById("countdownPage");
-
+    document.getElementById("countdownPage");
 
 const videoPage =
-document.getElementById("videoPage");
-
+    document.getElementById("videoPage");
 
 const quotePage =
-document.getElementById("quotePage");
-
+    document.getElementById("quotePage");
 
 const letterPage =
-document.getElementById("letterPage");
-
+    document.getElementById("letterPage");
 
 const memoryPage =
-document.getElementById("memoryPage");
-
+    document.getElementById("memoryPage");
 
 const questionPage =
-document.getElementById("questionPage");
-
+    document.getElementById("questionPage");
 
 const finalPage =
-document.getElementById("finalPage");
+    document.getElementById("finalPage");
 
 
+/* Main elements */
 
 const countdown =
-document.getElementById("countdown");
-
+    document.getElementById("countdown");
 
 const introVideo =
-document.getElementById("introVideo");
+    document.getElementById("introVideo");
 
 const videoSource =
-document.getElementById("videoSource");
+    document.getElementById("videoSource");
+
+const videoMessage =
+    document.getElementById("videoMessage");
+
+const playBtn =
+    document.getElementById("playBtn");
+
+const grain =
+    document.getElementById("grain");
+
+const typing =
+    document.getElementById("typing");
+
+const nextButton =
+    document.querySelector(".next");
+
+const no =
+    document.getElementById("no");
+
+const yes =
+    document.getElementById("yes");
 
 
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
+
+let movieStarted = false;
+
+let videoFrozen = false;
+
+let memoryWordsTimer = null;
+
+let finalRainStarted = false;
+
+
+/* =========================================================
+   PAGE SWITCH
+========================================================= */
+
+function showPage(page) {
+
+    const current =
+        document.querySelector(".page.active");
+
+
+    if (current === page) {
+        return;
+    }
+
+
+    if (current) {
+
+        current.classList.remove("active");
+    }
+
+
+    setTimeout(() => {
+
+        page.classList.add("active");
+
+    }, 300);
+}
+
+
+/* =========================================================
+   VIDEO SOURCE
+   Desktop / Mobile
+========================================================= */
 
 function setVideoForDevice() {
 
     const isMobile =
-        window.matchMedia("(max-width: 600px)").matches;
+        window.matchMedia(
+            "(max-width: 600px)"
+        ).matches;
 
 
-    const newSource = isMobile
-        ? "assets/intro-mobile.mp4"
-        : "assets/intro.mp4";
+    const newSource =
+        isMobile
+            ? "assets/intro-mobile.mp4"
+            : "assets/intro.mp4";
 
 
-    if (videoSource.getAttribute("src") !== newSource) {
+    if (
+        videoSource.getAttribute("src")
+        !== newSource
+    ) {
 
         videoSource.src = newSource;
 
         introVideo.load();
-
     }
-
 }
-
 
 
 setVideoForDevice();
 
 
-const videoMessage =
-document.getElementById("videoMessage");
-
-
-const typing =
-document.getElementById("typing");
-
-
-const nextButton =
-document.querySelector(".next");
-
-
-const playBtn =
-document.getElementById("playBtn");
-
-
-const grain =
-document.getElementById("grain");
-
-
-const no =
-document.getElementById("no");
-
-
-const yes =
-document.getElementById("yes");
-
-
-
-
-let movieStarted = false;
-
-
-let videoFrozen = false;
-
-
-
-
-
-
-
-/* =========================
-   PAGE SWITCH
-========================= */
-
-
-function showPage(page){
-
-
-    const current =
-    document.querySelector(".page.active");
-
-
-
-    if(current === page) return;
-
-
-
-    if(current){
-
-        current.classList.remove("active");
-
-    }
-
-
-
-    setTimeout(()=>{
-
-        page.classList.add("active");
-
-    },300);
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =========================
+/* =========================================================
    COUNTDOWN
-========================= */
+========================================================= */
 
+/*
+    Change this date if you ever want
+    to change the birthday date.
+*/
 
 const targetDate =
-new Date("August 22, 2026 00:00:00").getTime();
+    new Date(
+        "August 22, 2025 00:00:00"
+    ).getTime();
 
 
-
-
-
-function updateCountdown(){
-
+function updateCountdown() {
 
     const now =
-    new Date().getTime();
-
+        Date.now();
 
 
     const distance =
-    targetDate - now;
+        targetDate - now;
 
 
+    /* Birthday arrived */
 
+    if (distance <= 0) {
 
-
-    if(distance <= 0){
-
-
-
-        if(!movieStarted){
-
+        if (!movieStarted) {
 
             movieStarted = true;
 
-
             startMovie();
-
-
         }
 
-
         return;
-
-
     }
 
 
-
-
-
-
     const days =
-    Math.floor(
-        distance/(1000*60*60*24)
-    );
-
-
-
+        Math.floor(
+            distance /
+            (1000 * 60 * 60 * 24)
+        );
 
 
     const hours =
-    Math.floor(
-        (distance%(1000*60*60*24))
-        /(1000*60*60)
-    );
-
-
-
-
+        Math.floor(
+            (
+                distance %
+                (1000 * 60 * 60 * 24)
+            ) /
+            (1000 * 60 * 60)
+        );
 
 
     const minutes =
-    Math.floor(
-        (distance%(1000*60*60))
-        /(1000*60)
-    );
-
-
-
-
+        Math.floor(
+            (
+                distance %
+                (1000 * 60 * 60)
+            ) /
+            (1000 * 60)
+        );
 
 
     const seconds =
-    Math.floor(
-        (distance%(1000*60))
-        /1000
-    );
+        Math.floor(
+            (
+                distance %
+                (1000 * 60)
+            ) /
+            1000
+        );
 
 
-
-
-
-    countdown.innerHTML =
-
-    `${days} : ${hours} : ${minutes} : ${seconds}`;
-
-
-
-
-
+    countdown.textContent =
+        `${days} : ${hours} : ${minutes} : ${seconds}`;
 }
 
 
-
-setInterval(updateCountdown,1000);
+setInterval(
+    updateCountdown,
+    1000
+);
 
 
 updateCountdown();
+/* =========================================================
+   VIDEO
+========================================================= */
 
-
-
-
-
-
-
-
-
-/* =========================
-   VIDEO START
-========================= */
-
+/*
+    Time in seconds where the video pauses
+    temporarily to show the emotional message.
+*/
 
 const freezeTime = 64;
 
 
-
-
-function startMovie(){
-
+function startMovie() {
 
     showPage(videoPage);
 
-
     videoFrozen = false;
-
 
     introVideo.currentTime = 0;
 
-
     playBtn.classList.remove("hide");
 
-
+    videoMessage.style.opacity = "0";
 }
-/* =========================
+
+
+/* =========================================================
    VIDEO PLAY BUTTON
-========================= */
+========================================================= */
 
+playBtn.addEventListener(
+    "click",
+    () => {
 
-playBtn.addEventListener("click",()=>{
+        introVideo
+            .play()
+            .then(() => {
 
-    introVideo.play()
-    .then(()=>{
+                playBtn.classList.add("hide");
 
-        playBtn.classList.add("hide");
+                grain.style.opacity = "0";
 
-        grain.style.opacity = "0";
+            })
+            .catch(error => {
 
-    })
-    .catch(err=>{
+                console.log(
+                    "Video could not start:",
+                    error
+                );
 
-        console.log(err);
-
-    });
-
-});
-
-
-
-
-
-
-
-
-/* =========================
-   VIDEO FREEZE
-========================= */
-
-
-introVideo.addEventListener("timeupdate",()=>{
-
-
-
-    if(
-
-        introVideo.currentTime >= freezeTime
-
-        &&
-
-        !videoFrozen
-
-    ){
-
-
-
-        videoFrozen = true;
-
-
-
-        introVideo.pause();
-
-
-
-
-        videoMessage.style.opacity="1";
-
-
-
-        setTimeout(()=>{
-
-
-
-            videoMessage.style.opacity="0";
-
-
-
-            introVideo.play();
-
-
-
-        },3000);
-
-
+            });
 
     }
+);
 
 
+/* =========================================================
+   VIDEO FREEZE MOMENT
+========================================================= */
 
-});
+introVideo.addEventListener(
+    "timeupdate",
+    () => {
 
+        if (
+            introVideo.currentTime >= freezeTime
+            &&
+            !videoFrozen
+        ) {
 
+            videoFrozen = true;
 
-
-
-
-
-introVideo.addEventListener("ended",()=>{
-
-
-    showQuote();
-
-
-});
-
-
-
+            introVideo.pause();
 
 
+            videoMessage.style.opacity = "1";
 
 
+            setTimeout(() => {
+
+                videoMessage.style.opacity = "0";
+
+                introVideo.play();
+
+            }, 3000);
+        }
+
+    }
+);
 
 
-/* =========================
+/* =========================================================
+   VIDEO END
+========================================================= */
+
+introVideo.addEventListener(
+    "ended",
+    showQuote
+);
+
+
+/* =========================================================
    QUOTE
-========================= */
+========================================================= */
 
-
-function showQuote(){
-
+function showQuote() {
 
     showPage(quotePage);
 
 
-
     const lines =
-    document.querySelectorAll(".quote .line");
+        document.querySelectorAll(
+            ".quote .line"
+        );
 
 
+    lines.forEach(
+        (line, index) => {
 
-    lines.forEach((line,index)=>{
+            setTimeout(() => {
 
+                line.style.opacity = "1";
 
+            }, index * 2500);
 
-        setTimeout(()=>{
-
-
-            line.style.opacity="1";
-
-
-        },index * 2500);
-
+        }
+    );
 
 
-    });
+    setTimeout(() => {
+
+        document
+            .getElementById("heart")
+            .style.opacity = "1";
+
+    }, 8000);
 
 
+    /*
+        After the quote finishes,
+        show the envelope.
+    */
 
+    setTimeout(() => {
 
-
-
-    setTimeout(()=>{
-
-
-        document.getElementById("heart")
-        .style.opacity="1";
-
-
-
-    },8000);
-
-
-
-
-
-
-setTimeout(()=>{
         showPage(letterPage);
-        setupEnvelope(); // تجهيز الظرف للضغط
-    },10500);
 
+        setupEnvelope();
 
-
+    }, 10500);
 }
 
-/* =========================
-   ENVELOPE LOGIC
-========================= */
-function setupEnvelope() {
-    const envelopeWrapper = document.getElementById("envelopeWrapper");
-    const letterBox = document.querySelector(".letterBox");
 
-    envelopeWrapper.style.display = "flex";
-    envelopeWrapper.style.opacity = "1";
-    letterBox.classList.remove("show-letter");
-    letterBox.classList.add("hidden-letter");
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+function setupEnvelope() {
+
+    const envelopeWrapper =
+        document.getElementById(
+            "envelopeWrapper"
+        );
+
+    const letterBox =
+        document.querySelector(
+            ".letterBox"
+        );
+
+
+    /*
+        Always reset the state
+        before showing the envelope.
+    */
+
+    envelopeWrapper.style.display =
+        "flex";
+
+    envelopeWrapper.style.opacity =
+        "1";
+
+    envelopeWrapper.style.transform =
+        "";
+
+
+    envelopeWrapper.classList.remove(
+        "opening"
+    );
+
+
+    /*
+        IMPORTANT:
+        Letter stays completely hidden.
+    */
+
+    letterBox.classList.remove(
+        "show-letter"
+    );
+
+    letterBox.classList.add(
+        "hidden-letter"
+    );
+
 
     function openEnvelope() {
-        envelopeWrapper.style.transform = "scale(0.8)";
-        envelopeWrapper.style.opacity = "0";
+
+        envelopeWrapper.removeEventListener(
+            "click",
+            openEnvelope
+        );
+
+
+        /*
+            Start opening animation.
+        */
+
+        envelopeWrapper.classList.add(
+            "opening"
+        );
+
+
+        /*
+            Fade the envelope out
+            after opening.
+        */
 
         setTimeout(() => {
-            envelopeWrapper.style.display = "none";
-            letterBox.classList.remove("hidden-letter");
-            letterBox.classList.add("show-letter");
-            startTyping();
-        }, 600);
 
-        envelopeWrapper.removeEventListener("click", openEnvelope);
+            envelopeWrapper.style.opacity =
+                "0";
+
+            envelopeWrapper.style.transform =
+                "translateY(-30px) scale(.95)";
+
+        }, 900);
+
+
+        /*
+            Now show the actual paper.
+        */
+
+        setTimeout(() => {
+
+            envelopeWrapper.style.display =
+                "none";
+
+
+            letterBox.classList.remove(
+                "hidden-letter"
+            );
+
+            letterBox.classList.add(
+                "show-letter"
+            );
+
+
+            startTyping();
+
+        }, 1700);
     }
 
-    envelopeWrapper.addEventListener("click", openEnvelope);
+
+    envelopeWrapper.addEventListener(
+        "click",
+        openEnvelope
+    );
 }
 
 
+/* =========================================================
+   LETTER CONTENT
+========================================================= */
 
-/* =========================
-   LETTER
-========================= */
-
-
-const letterText = `
-
-Dear Nouran,
+const letterText = `Dear Nouran,
 
 Today is not just another day.
 
@@ -521,629 +510,801 @@ live in our hearts.
 I hope we keep creating
 new chapters together.
 
-Happy Birthday.
-
-`;
+Happy Birthday.`;
 
 
+/* Current typing position */
 
 let letterIndex = 0;
 
 
+/* =========================================================
+   TYPING EFFECT
+========================================================= */
 
-function startTyping(){
+function startTyping() {
 
-
-    typing.innerHTML = "";
+    typing.textContent = "";
 
     nextButton.style.opacity = "0";
-    nextButton.style.pointerEvents = "none";
+
+    nextButton.style.pointerEvents =
+        "none";
 
 
     letterIndex = 0;
 
 
+    const timer =
+        setInterval(() => {
 
-    const timer = setInterval(()=>{
-
-
-        typing.innerHTML += letterText[letterIndex];
-
-
-        letterIndex++;
+            typing.textContent +=
+                letterText[letterIndex];
 
 
+            letterIndex++;
 
 
-        if(letterIndex >= letterText.length){
+            if (
+                letterIndex >=
+                letterText.length
+            ) {
+
+                clearInterval(timer);
 
 
-            clearInterval(timer);
+                /*
+                    Show Continue
+                    after typing finishes.
+                */
 
+                setTimeout(() => {
 
+                    nextButton.style.opacity =
+                        "1";
 
-            setTimeout(()=>{
+                    nextButton.style.pointerEvents =
+                        "auto";
 
+                }, 800);
+            }
 
-                nextButton.style.opacity = "1";
-
-                nextButton.style.pointerEvents = "auto";
-
-
-            },800);
-
-
-
-        }
-
-
-
-    },45);
-
-
-
+        }, 45);
 }
 
 
+/* =========================================================
+   LETTER -> MEMORY WALL
+========================================================= */
 
+nextButton.addEventListener(
+    "click",
+    () => {
 
+        if (
+            letterPage.classList.contains(
+                "active"
+            )
+        ) {
 
+            showPage(memoryPage);
 
-
-
-/* =========================
-   LETTER TO MEMORY WALL
-========================= */
-
-
-nextButton.addEventListener("click",()=>{
-
-
-
-    if(letterPage.classList.contains("active")){
-
-
-
-        showPage(memoryPage);
-
-
-
-        startMemoryAnimation();
-
-
+            startMemoryAnimation();
+        }
 
     }
-
-
-
-});
-/* =========================
+);
+/* =========================================================
    MEMORY WALL
-========================= */
-
+========================================================= */
 
 const memories =
-document.querySelectorAll(".memory");
+    document.querySelectorAll(
+        ".memory"
+    );
 
 
+function startMemoryAnimation() {
 
+    /*
+        Reset every photo.
+    */
 
+    memories.forEach(
+        (memory, index) => {
 
-function startMemoryAnimation(){
-
-
-
-    memories.forEach((memory,index)=>{
-
-
-
-        memory.style.opacity="0";
-
-
-
-        memory.style.transform =
-
-        "translateY(-100px) rotate(0deg)";
-
-
-
-
-
-        setTimeout(()=>{
-
-
-
-            memory.style.transition =
-
-            "all 1.5s ease";
-
-
-
-            memory.style.opacity="1";
-
-
+            memory.style.opacity = "0";
 
             memory.style.transform =
-
-            "translateY(0) rotate(0deg)";
-
+                "translateY(-100px) rotate(0deg)";
 
 
-        },index * 400);
+            setTimeout(() => {
+
+                memory.style.transition =
+                    "all 1.5s ease";
 
 
+                memory.style.opacity =
+                    "1";
 
-    });
 
+                memory.style.transform =
+                    "translateY(0) rotate(0deg)";
 
+            }, index * 400);
 
+        }
+    );
 
 
     startMemoryWords();
 
 
+    /*
+        After 35 seconds,
+        leave the memory wall.
+    */
 
-
-
-    setTimeout(()=>{
-
+    setTimeout(() => {
 
         exitMemoryWall();
 
-
-
-    },35000);
-
-
-
+    }, 35000);
 }
 
 
+/* =========================================================
+   MEMORY QUOTES
+========================================================= */
 
-
-
-
-
-
-
-
-function startMemoryWords(){
-
-
+function startMemoryWords() {
 
     const quote =
-
-    document.getElementById("memoryQuote");
-
-
-
+        document.getElementById(
+            "memoryQuote"
+        );
 
 
     const words = [
 
-
-
         `
-
         Not every memory
-
         <br>
-
         is captured in a picture...
-
         `,
 
-
-
-
-
         `
-
         Some are hidden
-
         <br>
-
         in laughs,
-
         <br>
-
         conversations,
-
         <br>
-
         and little moments.
-
         `,
 
-
-
-
-
         `
-
         The moments we share
-
         <br>
-
         become stories
-
         <br>
-
         we never forget.
-
         `,
 
-
-
-
-
         `
-
         Every moment with you
-
         <br><br>
-
         becomes a new memory.
-
         `
-
-
 
     ];
-
-
-
-
-
 
 
     let index = 0;
 
 
+    /*
+        Clear old timer if this function
+        gets called again.
+    */
+
+    if (memoryWordsTimer) {
+
+        clearInterval(
+            memoryWordsTimer
+        );
+    }
 
 
+    memoryWordsTimer =
+        setInterval(() => {
+
+            quote.style.opacity = "0";
 
 
-    setInterval(()=>{
+            setTimeout(() => {
+
+                quote.innerHTML =
+                    words[index];
 
 
-
-        quote.style.opacity="0";
-
-
+                quote.style.opacity =
+                    "1";
 
 
-
-        setTimeout(()=>{
-
+                index++;
 
 
-            quote.innerHTML =
+                if (
+                    index >= words.length
+                ) {
 
-            words[index];
+                    index = 0;
+                }
 
+            }, 1500);
 
-
-            quote.style.opacity="1";
-
-
-
-            index++;
-
-
-
-
-
-            if(index >= words.length){
-
-
-                index = 0;
-
-
-            }
-
-
-
-
-
-        },1500);
-
-
-
-
-    },7000);
-
-
-
-
-
+        }, 7000);
 }
 
 
+/* =========================================================
+   EXIT MEMORY WALL
+========================================================= */
+
+function exitMemoryWall() {
+
+    if (memoryWordsTimer) {
+
+        clearInterval(
+            memoryWordsTimer
+        );
+
+        memoryWordsTimer = null;
+    }
 
 
+    memories.forEach(
+        memory => {
+
+            memory.style.transition =
+                "all 2s ease";
+
+            memory.style.transform =
+                "translateY(-150vh) rotate(20deg)";
+
+            memory.style.opacity =
+                "0";
+
+        }
+    );
 
 
+    document
+        .querySelector(".memoryText")
+        .style.opacity = "0";
 
 
-
-
-function exitMemoryWall(){
-
-
-
-    memories.forEach((memory)=>{
-
-
-
-        memory.style.transition =
-
-        "all 2s ease";
-
-
-
-
-
-        memory.style.transform =
-
-        "translateY(-150vh) rotate(20deg)";
-
-
-
-
-
-        memory.style.opacity="0";
-
-
-
-    });
-
-
-
-
-
-
-    document.querySelector(".memoryText")
-
-    .style.opacity="0";
-
-
-
-
-
-
-
-    setTimeout(()=>{
-
-
+    setTimeout(() => {
 
         showPage(questionPage);
 
-
-
-    },2500);
-
-
-
+    }, 2500);
 }
-/* =========================
-   NO BUTTON FLEE LOGIC (PERFECT ALIGNMENT)
-========================= */
 
-const noTextSpan = no.querySelector(".no-text") || no;
+
+/* =========================================================
+   NO BUTTON
+   The button runs away from the cursor.
+========================================================= */
+
+const noText =
+    no.querySelector(".no-text");
+
 
 const noTexts = [
+
     "NO",
+
     "Are you sure?",
+
     "Think again!",
+
     "Really?",
+
     "Nice try 😉",
+
     "Don't do this",
+
     "Please?",
+
     "You can't catch me!",
+
     "Wrong answer",
+
     "Error 404: No not found"
+
 ];
 
+
 let noTextIndex = 0;
+
 let isFleeing = false;
 
-function runFromMouse(e) {
-    if (!questionPage.classList.contains("active")) return;
 
-    const mouseX = e.clientX || (e.touches && e.touches[0].clientX);
-    const mouseY = e.clientY || (e.touches && e.touches[0].clientY);
+function runFromMouse(event) {
 
-    if (!mouseX || !mouseY) return;
+    if (
+        !questionPage.classList.contains(
+            "active"
+        )
+    ) {
 
-    const btnRect = no.getBoundingClientRect();
-    const btnCenterX = btnRect.left + btnRect.width / 2;
-    const btnCenterY = btnRect.top + btnRect.height / 2;
+        return;
+    }
 
-    const deltaX = mouseX - btnCenterX;
-    const deltaY = mouseY - btnCenterY;
-    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    const mouseX =
+        event.clientX ||
+        (
+            event.touches &&
+            event.touches[0] &&
+            event.touches[0].clientX
+        );
+
+
+    const mouseY =
+        event.clientY ||
+        (
+            event.touches &&
+            event.touches[0] &&
+            event.touches[0].clientY
+        );
+
+
+    if (
+        mouseX === undefined ||
+        mouseY === undefined
+    ) {
+
+        return;
+    }
+
+
+    const buttonRect =
+        no.getBoundingClientRect();
+
+
+    const centerX =
+        buttonRect.left +
+        buttonRect.width / 2;
+
+
+    const centerY =
+        buttonRect.top +
+        buttonRect.height / 2;
+
+
+    const deltaX =
+        mouseX - centerX;
+
+
+    const deltaY =
+        mouseY - centerY;
+
+
+    const distance =
+        Math.sqrt(
+            deltaX * deltaX +
+            deltaY * deltaY
+        );
+
 
     const fleeDistance = 130;
 
-    if (distance < fleeDistance) {
+
+    if (
+        distance < fleeDistance
+    ) {
+
         if (!isFleeing) {
+
             isFleeing = true;
-            no.style.position = 'fixed';
-            no.style.left = `${btnRect.left}px`;
-            no.style.top = `${btnRect.top}px`;
-            no.style.margin = '0';
+
+            no.style.position =
+                "fixed";
+
+            no.style.left =
+                `${buttonRect.left}px`;
+
+            no.style.top =
+                `${buttonRect.top}px`;
+
+            no.style.margin = "0";
         }
 
-        const angle = Math.atan2(deltaY, deltaX);
-        const fleeX = Math.cos(angle) * -1 * (fleeDistance - distance + 20);
-        const fleeY = Math.sin(angle) * -1 * (fleeDistance - distance + 20);
 
-        let newLeft = btnRect.left + fleeX;
-        let newTop = btnRect.top + fleeY;
+        const angle =
+            Math.atan2(
+                deltaY,
+                deltaX
+            );
+
+
+        const movement =
+            fleeDistance -
+            distance +
+            20;
+
+
+        const fleeX =
+            Math.cos(angle) *
+            -movement;
+
+
+        const fleeY =
+            Math.sin(angle) *
+            -movement;
+
+
+        let newLeft =
+            buttonRect.left +
+            fleeX;
+
+
+        let newTop =
+            buttonRect.top +
+            fleeY;
+
 
         const padding = 20;
-        const maxLeft = window.innerWidth - btnRect.width - padding;
-        const maxTop = window.innerHeight - btnRect.height - padding;
 
-        newLeft = Math.max(padding, Math.min(newLeft, maxLeft));
-        newTop = Math.max(padding, Math.min(newTop, maxTop));
 
-        no.style.left = `${newLeft}px`;
-        no.style.top = `${newTop}px`;
+        const maxLeft =
+            window.innerWidth -
+            buttonRect.width -
+            padding;
+
+
+        const maxTop =
+            window.innerHeight -
+            buttonRect.height -
+            padding;
+
+
+        newLeft =
+            Math.max(
+                padding,
+                Math.min(
+                    newLeft,
+                    maxLeft
+                )
+            );
+
+
+        newTop =
+            Math.max(
+                padding,
+                Math.min(
+                    newTop,
+                    maxTop
+                )
+            );
+
+
+        no.style.left =
+            `${newLeft}px`;
+
+        no.style.top =
+            `${newTop}px`;
     }
 }
+
+
+/* =========================================================
+   CHANGE NO TEXT
+========================================================= */
 
 function changeNoText() {
-    if (noTextSpan.querySelector && noTextSpan.querySelector(".no-text")) {
-        const span = noTextSpan.querySelector(".no-text");
-        span.style.opacity = "0";
-        setTimeout(() => {
-            noTextIndex = (noTextIndex + 1) % noTexts.length;
-            span.textContent = noTexts[noTextIndex];
-            span.style.opacity = "1";
-        }, 150);
-    } else {
-        noTextIndex = (noTextIndex + 1) % noTexts.length;
-        noTextSpan.textContent = noTexts[noTextIndex];
-    }
+
+    noText.style.opacity = "0";
+
+
+    setTimeout(() => {
+
+        noTextIndex =
+            (
+                noTextIndex + 1
+            ) %
+            noTexts.length;
+
+
+        noText.textContent =
+            noTexts[noTextIndex];
+
+
+        noText.style.opacity =
+            "1";
+
+    }, 150);
 }
 
-document.addEventListener("mousemove", runFromMouse);
-document.addEventListener("touchmove", runFromMouse);
-no.addEventListener("mouseenter", changeNoText);
-no.addEventListener("touchstart", changeNoText);
+
+/* Mouse */
+
+document.addEventListener(
+    "mousemove",
+    runFromMouse
+);
 
 
+/* Touch */
 
-/* =========================
+document.addEventListener(
+    "touchmove",
+    runFromMouse,
+    {
+        passive: true
+    }
+);
+
+
+/* Change text */
+
+no.addEventListener(
+    "mouseenter",
+    changeNoText
+);
+
+
+no.addEventListener(
+    "touchstart",
+    changeNoText,
+    {
+        passive: true
+    }
+);
+
+
+/* =========================================================
    YES BUTTON
-========================= */
+========================================================= */
+
+yes.addEventListener(
+    "click",
+    () => {
+
+        showPage(finalPage);
+
+        startFinalAnimation();
+
+    }
+);
 
 
-yes.addEventListener("click",()=>{
+/* =========================================================
+   FINAL ANIMATION
+========================================================= */
+
+function startFinalAnimation() {
+
+    const lines =
+        document.querySelectorAll(
+            ".finalLine"
+        );
 
 
-
-    showPage(finalPage);
-
-
-
-    startFinalAnimation();
+    const messageBlock =
+        document.querySelector(
+            ".finalMessageBlock"
+        );
 
 
-
-});
-
-
-
-
+    const last =
+        document.querySelector(
+            ".finalLast"
+        );
 
 
+    /*
+        Start heart rain.
+    */
 
-
-
-/* =========================
-   NEW FINAL ANIMATION & HEARTS RAIN
-========================= */
-
-function startFinalAnimation(){
-
-    const lines = document.querySelectorAll(".finalLine");
-    const messageBlock = document.querySelector(".finalMessageBlock");
-    const last = document.querySelector(".finalLast");
-    
-
-
-    // 1. بدأ مطر القلوب
     createHeartsRain();
 
 
-    // 2. ظهور النصوص بتوقيت رومانسي وبطيء
+    /*
+        Romantic text timing.
+    */
 
-    setTimeout(()=>{
-        lines[0].classList.add("finalShow");
-    }, 2000); // 2 ثانية
+    setTimeout(() => {
 
+        lines[0].classList.add(
+            "finalShow"
+        );
 
-    setTimeout(()=>{
-        lines[1].classList.add("finalShow");
-    }, 6000); // 6 ثانية
-
-
-    setTimeout(()=>{
-        lines[2].classList.add("finalShow");
-    }, 10000); // 10 ثانية
+    }, 2000);
 
 
-    setTimeout(()=>{
-        messageBlock.classList.add("finalShow"); // يظهر البلوك كله
-    }, 15000); // 15 ثانية
+    setTimeout(() => {
+
+        lines[1].classList.add(
+            "finalShow"
+        );
+
+    }, 6000);
 
 
-    setTimeout(()=>{
-        last.classList.add("finalShow");
-    }, 21000); // 21 ثانية
+    setTimeout(() => {
 
+        lines[2].classList.add(
+            "finalShow"
+        );
+
+    }, 10000);
+
+
+    setTimeout(() => {
+
+        messageBlock.classList.add(
+            "finalShow"
+        );
+
+    }, 15000);
+
+
+    setTimeout(() => {
+
+        last.classList.add(
+            "finalShow"
+        );
+
+    }, 21000);
 }
 
 
+/* =========================================================
+   GOLDEN HEART RAIN
+========================================================= */
 
-// دالة لإنشاء مطر القلوب الذهبية
 function createHeartsRain() {
-    const rainContainer = document.getElementById("heartsRain");
-    const heartSymbols = ["🤍", "❤️", "💛", "💖"];
 
-    // إنشاء قلب كل فترة
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("heart-drop");
+    /*
+        Prevent creating multiple
+        heart intervals.
+    */
 
-        // اختيار رمز عشوائي
-        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+    if (finalRainStarted) {
 
-        // إحداثيات عشوائية
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 4) + "s"; // بين 4 لـ 7 ثواني
-        heart.style.opacity = Math.random() * 0.5 + 0.2; // شفافية مختلفة
-
-        rainContainer.appendChild(heart);
-
-        // إزالة القلب بعد انتهاء الأنميشن
-        setTimeout(() => {
-            heart.remove();
-        }, 7000);
-
-    }, 300); // قلب جديد كل 0.3 ثانية
-}
-
-
-
-
-
-
-
-
-/* =========================
-   MOBILE SAFETY
-========================= */
-
-
-window.addEventListener("resize",()=>{
-
-
-
-    if(no){
-
-
-        no.style.left="";
-
-
-        no.style.top="";
-
-
+        return;
     }
 
 
+    finalRainStarted = true;
 
-});
+
+    const rainContainer =
+        document.getElementById(
+            "heartsRain"
+        );
+
+
+    const heartSymbols = [
+        "🤍",
+        "❤️",
+        "💛",
+        "💖"
+    ];
+
+
+    setInterval(() => {
+
+        const heart =
+            document.createElement(
+                "div"
+            );
+
+
+        heart.classList.add(
+            "heart-drop"
+        );
+
+
+        /*
+            Random heart.
+        */
+
+        heart.textContent =
+            heartSymbols[
+                Math.floor(
+                    Math.random() *
+                    heartSymbols.length
+                )
+            ];
+
+
+        /*
+            Random horizontal position.
+        */
+
+        heart.style.left =
+            Math.random() *
+            100 +
+            "vw";
+
+
+        /*
+            Random falling speed.
+        */
+
+        const duration =
+            Math.random() * 3 + 4;
+
+
+        heart.style.animationDuration =
+            `${duration}s`;
+
+
+        /*
+            Random opacity.
+        */
+
+        heart.style.opacity =
+            Math.random() * .5 + .2;
+
+
+        rainContainer.appendChild(
+            heart
+        );
+
+
+        /*
+            Remove old hearts
+            to prevent memory usage.
+        */
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 7000);
+
+    }, 300);
+}
+
+
+/* =========================================================
+   RESET NO BUTTON ON RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        if (!no) {
+            return;
+        }
+
+
+        /*
+            Put NO back beside YES
+            if screen size changes.
+        */
+
+        no.style.position =
+            "relative";
+
+        no.style.left =
+            "";
+
+        no.style.top =
+            "";
+
+        no.style.margin =
+            "";
+
+
+        isFleeing = false;
+    }
+);

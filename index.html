@@ -3,24 +3,51 @@
 
 <head>
 
+    <!-- =========================
+         BASIC META
+    ========================== -->
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080808"
+    >
 
     <title>For Nour ❤️</title>
 
 
-    <!-- Fonts -->
+    <!-- =========================
+         GOOGLE FONTS
+    ========================== -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet"
+    >
 
 
-    <link rel="stylesheet" href="style.css">
+    <!-- =========================
+         MAIN CSS
+    ========================== -->
 
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -28,465 +55,530 @@
 <body>
 
 
-<div id="grain"></div>
+    <!-- =========================
+         GRAIN OVERLAY
+         تأثير الحبيبات السينمائي
+    ========================== -->
 
+    <div id="grain"></div>
 
 
-<!-- =========================
-     COUNTDOWN
-========================= -->
+    <!-- =========================================================
+         PAGE 1
+         COUNTDOWN
+    ========================================================== -->
 
+    <section
+        id="countdownPage"
+        class="page active"
+    >
 
-<section id="countdownPage" class="page active">
+        <div class="countdownBox">
 
-
-<div class="countdownBox">
-
-    <p class="comingText">
-        A special day is coming...
-    </p>
-
-    <p class="date">
-        22 August
-    </p>
-
-    <h1 id="countdown">
-        00 : 00 : 00 : 00
-    </h1>
-
-    <div class="labels">
-        <span>Days</span>
-        <span>Hours</span>
-        <span>Minutes</span>
-        <span>Seconds</span>
-    </div>
-
-</div>
-
-
-
-
-</section>
-
-
-
-
-
-
-
-<!-- =========================
-     INTRO VIDEO
-========================= -->
-
-
-<section id="videoPage" class="page">
-
-
-<video
-    id="introVideo"
-    playsinline
-    webkit-playsinline
-    preload="auto"
->
-    <source id="videoSource" src="assets/intro.mp4" type="video/mp4">
-
-</video>
-
-
-
-    <button id="playBtn">
-
-        ▶ Start The Memory
-
-    </button>
-
-
-
-
-    <div id="videoMessage">
-
-
-        <h1>
-
-            A moment I wanted you to remember ❤️
-
-        </h1>
-
-
-    </div>
-
-
-
-</section>
-<!-- =========================
-     QUOTE
-========================= -->
-
-
-<section id="quotePage" class="page">
-
-
-    <div class="quote">
-
-
-        <p class="line">
-
-            We'll always be together;
-
-        </p>
-
-
-
-        <p class="line">
-
-            you'll always be my daughter
-
-        </p>
-
-
-
-        <p class="line">
-
-            and my little sister.
-
-        </p>
-
-
-
-        <div id="heart">
-
-            🤍
-
-        </div>
-
-
-    </div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-     LETTER
-========================= -->
-
-
-<!-- =========================
-     LETTER (WITH ENVELOPE)
-========================= -->
-<section id="letterPage" class="page">
-
-    <!-- الظرف الفينتاج -->
-    <div id="envelopeWrapper" class="envelope-wrapper">
-        <div class="envelope">
-            <div class="wax-seal">💌</div>
-            <p class="envelope-click-hint">Click to open your letter</p>
-        </div>
-    </div>
-
-    <!-- كارت الرسالة (مخفي ف الأول) -->
-    <div class="letterBox hidden-letter">
-        <h2>A Letter For You</h2>
-        <p id="typing"></p>
-        <button class="next">Continue</button>
-    </div>
-
-</section>
-<!-- =========================
-     MEMORY WALL
-========================= -->
-
-
-<section id="memoryPage" class="page">
-
-
-
-    <div class="memoryBackground"></div>
-
-
-
-
-
-    <div class="rope rope1"></div>
-
-    <div class="rope rope2"></div>
-
-
-
-
-
-
-
-    <div class="memory memory1">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/1.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory2">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/2.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory3">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/3.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory4">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/4.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memoryText">
-
-
-        <h1 id="memoryQuote">
-
-            Not every memory
-
-            <br>
-
-            is captured in a picture...
-
-
-        </h1>
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory5">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/5.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory6">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/6.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory7">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/7.jpg">
-
-
-    </div>
-
-
-
-
-
-    <div class="memory memory8">
-
-
-        <div class="clip"></div>
-
-
-        <img src="assets/photos/8.jpg">
-
-
-    </div>
-
-
-
-
-</section>
-<!-- =========================
-     QUESTION
-========================= -->
-
-
-<section id="questionPage" class="page">
-
-
-
-    <div class="questionBox">
-
-
-        <h1>
-
-            Will you stay with me
-
-            <br><br>
-
-            for every chapter
-
-            <br><br>
-
-            that hasn't been written yet?
-
-
-
-        </h1>
-
-
-
-
-
-        <div class="buttons">
-
-
-            <button id="yes">
-
-                YES ❤️
-
-            </button>
-
-
-
-            <button id="no">
-                <span class="no-text">NO</span>
-            </button>
-
-
-
-        </div>
-
-
-    </div>
-
-
-
-</section>
-
-
-
-
-
-
-
-<!-- =========================
-     FINAL
-========================= -->
-
-
-<section id="finalPage" class="page">
-
-    <!-- حاوية مطر القلوب الذهبية -->
-    <div id="heartsRain"></div>
-
-    <div class="finalScene">
-        <h1 class="finalLine one">
-            And this is not the end...
-        </h1>
-
-        <h1 class="finalLine two">
-            It's just another chapter.
-        </h1>
-
-        <h1 class="finalLine three">
-            Happy Birthday
-            <br>
-            Nour <span class="white-heart">🤍</span>
-        </h1>
-
-        <div class="finalMessageBlock">
-            <p class="finalMessage">
-                Thank you for every laugh.
-                <br>
-                Every moment.
-                <br>
-                Every memory.
+            <p class="comingText">
+                A special day is coming...
             </p>
 
-            <p class="finalMessage love-you">
-                I love you.
-                <br>
-                Always.
+            <p class="date">
+                22 August
             </p>
+
+            <h1 id="countdown">
+                00 : 00 : 00 : 00
+            </h1>
+
+            <div class="labels">
+
+                <span>Days</span>
+                <span>Hours</span>
+                <span>Minutes</span>
+                <span>Seconds</span>
+
+            </div>
+
         </div>
 
-        <p class="finalLast">
-            Forever isn't a place...
-            <br>
-            It's every moment spent with you.
-        </p>
-    </div>
-</section>
+    </section>
 
 
+    <!-- =========================================================
+         PAGE 2
+         INTRO VIDEO
+    ========================================================== -->
+
+    <section
+        id="videoPage"
+        class="page"
+    >
+
+        <video
+            id="introVideo"
+            playsinline
+            webkit-playsinline
+            preload="auto"
+        >
+
+            <!--
+                JavaScript automatically chooses:
+                Desktop  -> intro.mp4
+                Mobile   -> intro-mobile.mp4
+            -->
+
+            <source
+                id="videoSource"
+                src="assets/intro.mp4"
+                type="video/mp4"
+            >
+
+        </video>
 
 
+        <!-- Video start button -->
+
+        <button id="playBtn">
+            ▶ Start The Memory
+        </button>
 
 
+        <!-- Message appearing during video -->
+
+        <div id="videoMessage">
+
+            <h1>
+                A moment I wanted you to remember ❤️
+            </h1>
+
+        </div>
+
+    </section>
 
 
-<script src="script.js"></script>
+    <!-- =========================================================
+         PAGE 3
+         QUOTE
+    ========================================================== -->
 
+    <section
+        id="quotePage"
+        class="page"
+    >
+
+        <div class="quote">
+
+            <p class="line">
+                We'll always be together;
+            </p>
+
+            <p class="line">
+                you'll always be my daughter
+            </p>
+
+            <p class="line">
+                and my little sister.
+            </p>
+
+            <div id="heart">
+                🤍
+            </div>
+
+        </div>
+
+    </section>
+        <!-- =========================================================
+         PAGE 4
+         ENVELOPE + LETTER
+    ========================================================== -->
+
+    <section
+        id="letterPage"
+        class="page"
+    >
+
+
+        <!-- =====================================================
+             ENVELOPE
+             ده اللي بيظهر أولًا فقط
+        ====================================================== -->
+
+        <div
+            id="envelopeWrapper"
+            class="envelope-wrapper"
+        >
+
+            <div class="envelope">
+
+
+                <!-- Envelope flap -->
+
+                <div class="envelope-flap"></div>
+
+
+                <!-- Main envelope body -->
+
+                <div class="envelope-body">
+
+
+                    <!-- Title printed on envelope -->
+
+                    <div class="envelope-title">
+
+                        <span>
+                            A LETTER
+                        </span>
+
+                        <strong>
+                            FOR NOUR
+                        </strong>
+
+                    </div>
+
+
+                    <!-- Wax seal -->
+
+                    <div class="wax-seal">
+                        ♥
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Click instruction -->
+
+            <p class="envelope-click-hint">
+                Click to open your letter
+            </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             LETTER
+             مخفية بالكامل لحد ما الظرف يتفتح
+        ====================================================== -->
+
+        <div
+            class="letterBox hidden-letter"
+        >
+
+            <div class="letter-paper">
+
+
+                <h2>
+                    A Letter For You
+                </h2>
+
+
+                <!--
+                    JavaScript writes the letter here
+                    character by character.
+                -->
+
+                <p id="typing"></p>
+
+
+                <button class="next">
+                    Continue
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         PAGE 5
+         MEMORY WALL
+    ========================================================== -->
+
+    <section
+        id="memoryPage"
+        class="page"
+    >
+
+        <div class="memoryBackground"></div>
+
+
+        <!-- Clothes lines / ropes -->
+
+        <div class="rope rope1"></div>
+        <div class="rope rope2"></div>
+
+
+        <!-- =========================
+             TOP ROW
+        ========================== -->
+
+        <div class="memory memory1">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/1.jpg"
+                alt="Memory 1"
+            >
+
+        </div>
+
+
+        <div class="memory memory2">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/2.jpg"
+                alt="Memory 2"
+            >
+
+        </div>
+
+
+        <div class="memory memory3">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/3.jpg"
+                alt="Memory 3"
+            >
+
+        </div>
+
+
+        <div class="memory memory4">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/4.jpg"
+                alt="Memory 4"
+            >
+
+        </div>
+
+
+        <!-- =========================
+             CENTER TEXT
+        ========================== -->
+
+        <div class="memoryText">
+
+            <h1 id="memoryQuote">
+                Not every memory
+                <br>
+                is captured in a picture...
+            </h1>
+
+        </div>
+
+
+        <!-- =========================
+             BOTTOM ROW
+        ========================== -->
+
+        <div class="memory memory5">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/5.jpg"
+                alt="Memory 5"
+            >
+
+        </div>
+
+
+        <div class="memory memory6">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/6.jpg"
+                alt="Memory 6"
+            >
+
+        </div>
+
+
+        <div class="memory memory7">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/7.jpg"
+                alt="Memory 7"
+            >
+
+        </div>
+
+
+        <div class="memory memory8">
+
+            <div class="clip"></div>
+
+            <img
+                src="assets/photos/8.jpg"
+                alt="Memory 8"
+            >
+
+        </div>
+
+    </section>
+        <!-- =========================================================
+         PAGE 6
+         QUESTION
+    ========================================================== -->
+
+    <section
+        id="questionPage"
+        class="page"
+    >
+
+        <div class="questionBox">
+
+            <h1>
+
+                Will you stay with me
+
+                <br><br>
+
+                for every chapter
+
+                <br><br>
+
+                that hasn't been written yet?
+
+            </h1>
+
+
+            <div class="buttons">
+
+                <button id="yes">
+                    YES ❤️
+                </button>
+
+
+                <button id="no">
+
+                    <span class="no-text">
+                        NO
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         PAGE 7
+         FINAL SCENE
+    ========================================================== -->
+
+    <section
+        id="finalPage"
+        class="page"
+    >
+
+
+        <!-- Golden heart rain -->
+
+        <div id="heartsRain"></div>
+
+
+        <div class="finalScene">
+
+
+            <!-- First line -->
+
+            <h1 class="finalLine one">
+                And this is not the end...
+            </h1>
+
+
+            <!-- Second line -->
+
+            <h1 class="finalLine two">
+                It's just another chapter.
+            </h1>
+
+
+            <!-- Birthday -->
+
+            <h1 class="finalLine three">
+
+                Happy Birthday
+
+                <br>
+
+                Nour
+                <span class="white-heart">
+                    🤍
+                </span>
+
+            </h1>
+
+
+            <!-- Messages -->
+
+            <div class="finalMessageBlock">
+
+                <p class="finalMessage">
+
+                    Thank you for every laugh.
+
+                    <br>
+
+                    Every moment.
+
+                    <br>
+
+                    Every memory.
+
+                </p>
+
+
+                <p class="finalMessage love-you">
+
+                    I love you.
+
+                    <br>
+
+                    Always.
+
+                </p>
+
+            </div>
+
+
+            <!-- Last sentence -->
+
+            <p class="finalLast">
+
+                Forever isn't a place...
+
+                <br>
+
+                It's every moment spent with you.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script src="script.js"></script>
 
 </body>
 
