@@ -1332,3 +1332,32 @@ window.addEventListener(
         isFleeing = false;
     }
 );
+/* =========================================================
+   DEVELOPMENT PREVIEW MODE
+========================================================= */
+
+const previewPage = new URLSearchParams(
+    window.location.search
+).get("preview");
+
+const previewPages = {
+    countdown: countdownPage,
+    video: videoPage,
+    quote: quotePage,
+    letter: letterPage,
+    memory: memoryPage,
+    question: questionPage,
+    final: finalPage
+};
+
+if (previewPage && previewPages[previewPage]) {
+
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
+        });
+
+    previewPages[previewPage]
+        .classList.add("active");
+}

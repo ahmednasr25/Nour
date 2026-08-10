@@ -2012,147 +2012,118 @@ button:hover {
    MOBILE MEMORY
 ========================================================= */
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
 
     #memoryPage {
-
         padding: 0;
-
         overflow: hidden;
     }
 
-
     .rope {
-
         width: 92%;
-
         left: 4%;
     }
 
-
     .rope1 {
-
         top: 23%;
     }
 
-
     .rope2 {
-
         bottom: 23%;
     }
 
 
+    /* =========================================
+       حجم الفريم
+    ========================================= */
+
     .memory {
-
         width: 92px;
-
         height: 125px;
 
-        padding:
-            6px 6px 18px;
+        padding: 6px 6px 18px;
 
-        box-shadow:
-            0 12px 25px
-            rgba(0,0,0,.55);
+        /* مهم: الصورة نفسها لا تتحرك داخل الفريم */
+        transform-origin: top center;
     }
 
 
-    .clip {
+    .memory img {
+        width: 100%;
+        height: 100%;
 
-        top: -11px;
-
-        width: 15px;
-
-        height: 23px;
-
-        border-radius:
-            3px 3px 5px 5px;
+        object-fit: cover;
+        object-position: center center;
     }
 
 
-    /* TOP */
+    /* =========================================
+       الصف الأول
+       1     2     3
+    ========================================= */
 
     .memory1 {
-
         top: 13%;
-
-        left: 5%;
+        left: 4%;
     }
-
 
     .memory2 {
-
-        top: 10%;
-
+        top: 11%;
         left: 50%;
 
-        transform:
-            translateX(-50%)
-            rotate(2deg);
+        margin-left: -46px;
     }
-
 
     .memory3 {
-
         top: 13%;
-
-        right: 5%;
+        right: 4%;
     }
 
 
-    /* BOTTOM */
+    /* =========================================
+       الصف الثاني
+       4     5     6
+    ========================================= */
 
     .memory4 {
-
         bottom: 11%;
-
-        left: 7%;
+        left: 4%;
     }
-
 
     .memory5 {
-
         bottom: 9%;
-
         left: 50%;
 
-        transform:
-            translateX(-50%)
-            rotate(-2deg);
+        margin-left: -46px;
     }
-
 
     .memory6 {
-
         bottom: 11%;
-
-        right: 7%;
+        right: 4%;
     }
 
 
-    /* Side photos removed on small screen */
-
+    /* الصور الجانبية القديمة */
     .memory7,
     .memory8 {
-
         display: none;
     }
 
 
-    .memoryText {
+    /* =========================================
+       النص في المنتصف
+    ========================================= */
 
+    .memoryText {
         width: 78%;
     }
 
-
     #memoryQuote {
-
-        font-size:
-            clamp(
-                1.7rem,
-                8vw,
-                2.2rem
-            );
+        font-size: clamp(
+            1.7rem,
+            8vw,
+            2.2rem
+        );
 
         line-height: 1.3;
     }
