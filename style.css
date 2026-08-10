@@ -1720,44 +1720,65 @@ button:hover {
 }
 
 
+
 /* =========================================================
-   PHOTO CLIP
+   ROMANTIC PHOTO ROPE
 ========================================================= */
 
 .clip {
-
     position: absolute;
 
-    top: -17px;
-
+    top: -48px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    width: 2px;
+    height: 50px;
 
-    width: 24px;
-
-    height: 34px;
+    transform: translateX(-50%);
 
     background:
         linear-gradient(
-            90deg,
-            #80602f,
+            to bottom,
+            transparent,
+            rgba(212,175,55,.35),
             #d4af37,
-            #80602f
+            rgba(255,255,255,.8)
         );
 
-    border-radius:
-        4px 4px 7px 7px;
+    border-radius: 10px;
 
     box-shadow:
-        0 4px 8px
-        rgba(0,0,0,.4);
+        0 0 5px rgba(212,175,55,.5),
+        0 0 12px rgba(255,255,255,.15);
 
     z-index: 10;
 
-    transition:
-        .4s ease;
+    pointer-events: none;
+}
+
+
+/* نقطة الربط الصغيرة أعلى الفريم */
+
+.clip::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: -2px;
+    left: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: #d4af37;
+
+    box-shadow:
+        0 0 6px rgba(212,175,55,.7),
+        0 0 12px rgba(212,175,55,.3);
 }
 
 
@@ -2148,12 +2169,9 @@ button:hover {
 
 
     .clip {
-
-        top: -10px;
-
-        width: 13px;
-
-        height: 20px;
+        top: -34px;
+        width: 2px;
+        height: 36px;
     }
 
 
@@ -2784,4 +2802,77 @@ button:hover {
 
         font-size: 1.6rem;
     }
+}
+
+/* =========================================================
+   ROMANTIC STRINGS - MOBILE MEMORY
+   حبل بدل الدبوس
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .memory .clip {
+        position: absolute;
+
+        top: -32px;
+        left: 50%;
+
+        width: 2px;
+        height: 34px;
+
+        margin: 0;
+
+        transform: translateX(-50%);
+
+        background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0),
+            rgba(212,175,55,.45),
+            #d4af37
+        );
+
+        border: none;
+        border-radius: 10px;
+
+        box-shadow:
+            0 0 5px rgba(212,175,55,.5),
+            0 0 10px rgba(255,255,255,.15);
+
+        z-index: 10;
+
+        pointer-events: none;
+    }
+
+
+    /* نقطة صغيرة عند مكان اتصال الحبل بالفريم */
+
+    .memory .clip::after {
+        content: "";
+
+        position: absolute;
+
+        bottom: -2px;
+        left: 50%;
+
+        width: 6px;
+        height: 6px;
+
+        transform: translateX(-50%);
+
+        border-radius: 50%;
+
+        background: #d4af37;
+
+        box-shadow:
+            0 0 6px rgba(212,175,55,.7),
+            0 0 12px rgba(212,175,55,.3);
+    }
+
+
+    /* نخلي الحبل يتحرك مع الفريم */
+
+    .memory {
+        transform-origin: top center;
+    }
+
 }

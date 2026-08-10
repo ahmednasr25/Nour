@@ -666,7 +666,7 @@ function startMemoryAnimation() {
 
 
     /*
-        After 35 seconds,
+        After 41 seconds,
         leave the memory wall.
     */
 
@@ -674,7 +674,7 @@ function startMemoryAnimation() {
 
         exitMemoryWall();
 
-    }, 35000);
+    }, 41000);
 }
 
 
@@ -685,10 +685,7 @@ function startMemoryAnimation() {
 function startMemoryWords() {
 
     const quote =
-        document.getElementById(
-            "memoryQuote"
-        );
-
+        document.getElementById("memoryQuote");
 
     const words = [
 
@@ -699,13 +696,19 @@ function startMemoryWords() {
         `,
 
         `
-        Some are hidden
+        Some live in the laughter,
         <br>
-        in laughs,
+        the little moments,
         <br>
-        conversations,
+        and the days we never knew
         <br>
-        and little moments.
+        would become unforgettable.
+        `,
+
+        `
+        And no matter how much time passes,
+        <br>
+        some memories will always feel like home.
         `,
 
         `
@@ -717,59 +720,77 @@ function startMemoryWords() {
         `,
 
         `
-        Every moment with you
-        <br><br>
-        becomes a new memory.
+        I love you more than words
+        could ever explain...
         `
-
     ];
 
 
-    let index = 0;
+    // نبدأ من الجملة الثانية
+    // لأن الأولى موجودة أصلًا في HTML
+    let index = 1;
 
 
-    /*
-        Clear old timer if this function
-        gets called again.
-    */
-
+    // إلغاء أي مؤقت قديم
     if (memoryWordsTimer) {
 
-        clearInterval(
-            memoryWordsTimer
-        );
+        clearTimeout(memoryWordsTimer);
+
+        memoryWordsTimer = null;
     }
 
 
+    function showNextWord() {
+
+        // لو وصلنا لآخر جملة، نقف نهائيًا
+        if (index >= words.length) {
+
+            memoryWordsTimer = null;
+
+            return;
+        }
+
+
+        quote.style.opacity = "0";
+
+
+        setTimeout(() => {
+
+            quote.innerHTML =
+                words[index];
+
+            quote.style.opacity =
+                "1";
+
+            index++;
+
+
+            // بعد ظهور الجملة الخامسة
+            // لا نبدأ من الأول
+            if (index < words.length) {
+
+                memoryWordsTimer =
+                    setTimeout(
+                        showNextWord,
+                        7000
+                    );
+
+            } else {
+
+                memoryWordsTimer = null;
+
+            }
+
+        }, 1500);
+    }
+
+
+    // أول تغيير بعد 7 ثواني
     memoryWordsTimer =
-        setInterval(() => {
-
-            quote.style.opacity = "0";
-
-
-            setTimeout(() => {
-
-                quote.innerHTML =
-                    words[index];
-
-
-                quote.style.opacity =
-                    "1";
-
-
-                index++;
-
-
-                if (
-                    index >= words.length
-                ) {
-
-                    index = 0;
-                }
-
-            }, 1500);
-
-        }, 7000);
+        setTimeout(
+            showNextWord,
+            7000
+        );
 }
 
 
@@ -1360,4 +1381,10 @@ if (previewPage && previewPages[previewPage]) {
 
     previewPages[previewPage]
         .classList.add("active");
+
+
+    // تشغيل أنيميشن الـ Memory أثناء الـ Preview
+    if (previewPage === "memory") {
+        startMemoryAnimation();
+    }
 }
