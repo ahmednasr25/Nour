@@ -144,7 +144,7 @@ setVideoForDevice();
 
 const targetDate =
     new Date(
-        "August 22, 2025 00:00:00"
+        "August 22, 2026 00:00:00"
     ).getTime();
 
 
