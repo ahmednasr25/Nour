@@ -543,9 +543,276 @@ button:hover {
    QUOTE PAGE
 ========================================================= */
 
+#quotePage {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            #21170d 0%,
+            #0e0b08 42%,
+            #050505 100%
+        );
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.quoteBackground {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   GOLDEN LIGHT
+========================================================= */
+
+.quoteGlow {
+
+    position: absolute;
+
+    width: 550px;
+
+    height: 550px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(212,175,55,.18) 0%,
+            rgba(212,175,55,.08) 30%,
+            transparent 70%
+        );
+
+    filter: blur(35px);
+
+    animation:
+        quoteGlow 7s ease-in-out infinite;
+}
+
+
+@keyframes quoteGlow {
+
+    0%,
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.9);
+
+        opacity: .6;
+    }
+
+    50% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.15);
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   FLOATING LIGHTS
+========================================================= */
+
+.quoteStars {
+
+    position: absolute;
+
+    inset: 0;
+}
+
+
+.quoteStars span {
+
+    position: absolute;
+
+    width: 3px;
+
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: #d4af37;
+
+    box-shadow:
+        0 0 10px
+        rgba(212,175,55,.8);
+
+    opacity: 0;
+
+    animation:
+        quoteStarFloat 6s ease-in-out infinite;
+}
+
+
+.quoteStars span:nth-child(1) {
+
+    left: 12%;
+
+    top: 25%;
+
+    animation-delay: 0s;
+}
+
+
+.quoteStars span:nth-child(2) {
+
+    left: 25%;
+
+    top: 70%;
+
+    animation-delay: -2s;
+}
+
+
+.quoteStars span:nth-child(3) {
+
+    left: 38%;
+
+    top: 18%;
+
+    animation-delay: -4s;
+}
+
+
+.quoteStars span:nth-child(4) {
+
+    left: 52%;
+
+    top: 80%;
+
+    animation-delay: -1s;
+}
+
+
+.quoteStars span:nth-child(5) {
+
+    left: 67%;
+
+    top: 27%;
+
+    animation-delay: -3s;
+}
+
+
+.quoteStars span:nth-child(6) {
+
+    left: 78%;
+
+    top: 68%;
+
+    animation-delay: -5s;
+}
+
+
+.quoteStars span:nth-child(7) {
+
+    left: 88%;
+
+    top: 42%;
+
+    animation-delay: -2.5s;
+}
+
+
+.quoteStars span:nth-child(8) {
+
+    left: 8%;
+
+    top: 55%;
+
+    animation-delay: -4.5s;
+}
+
+
+@keyframes quoteStarFloat {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(.5);
+    }
+
+    30% {
+
+        opacity: .7;
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-20px)
+            scale(1.2);
+    }
+
+    75% {
+
+        opacity: .5;
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-55px)
+            scale(.4);
+    }
+}
+
+
+/* =========================================================
+   QUOTE CONTENT
+========================================================= */
+
 .quote {
 
+    position: relative;
+
+    z-index: 10;
+
     width: 90%;
+
+    max-width: 1000px;
 
     text-align: center;
 
@@ -555,9 +822,15 @@ button:hover {
 }
 
 
+/* =========================================================
+   QUOTE LINES
+========================================================= */
+
 .quote .line {
 
     opacity: 0;
+
+    margin: 18px 0;
 
     font-size:
         clamp(
@@ -568,27 +841,228 @@ button:hover {
 
     line-height: 1.4;
 
-    margin: 20px 0;
-
     letter-spacing: 1px;
 
+    color: #f5f5f5;
+
+    transform:
+        translateY(30px);
+
+    filter: blur(6px);
+
     transition:
-        opacity 1.5s ease;
+        opacity 1.5s ease,
+        transform 1.5s ease,
+        filter 1.5s ease;
 }
 
+
+.quote .line.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    filter: blur(0);
+}
+
+
+/* =========================================================
+   HEART
+========================================================= */
 
 #heart {
 
     margin-top: 40px;
 
-    font-size: 50px;
+    font-size: 55px;
 
     opacity: 0;
 
+    transform:
+        scale(.5);
+
     transition:
-        opacity 2s ease;
+        opacity 1.5s ease,
+        transform 1.5s ease;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255,255,255,.2)
+        );
 }
 
+
+#heart.show {
+
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+    animation:
+        quoteHeartBeat 2.5s ease-in-out infinite;
+}
+
+
+@keyframes quoteHeartBeat {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+    }
+
+    50% {
+
+        transform:
+            scale(1.13);
+    }
+}
+
+
+/* =========================================================
+   FINAL SENTENCE
+========================================================= */
+
+.quoteEnding {
+
+    margin-top: 25px;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:
+        clamp(
+            .65rem,
+            2vw,
+            .85rem
+        );
+
+    font-weight: 300;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color:
+        rgba(212,175,55,.75);
+
+    opacity: 0;
+
+    transform:
+        translateY(15px);
+
+    transition:
+        opacity 1.8s ease,
+        transform 1.8s ease;
+}
+
+
+.quoteEnding.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px) {
+
+    #quotePage {
+
+        padding: 15px;
+    }
+
+
+    .quote {
+
+        width: 92%;
+    }
+
+
+    .quote .line {
+
+        font-size:
+            clamp(
+                1.55rem,
+                7vw,
+                2.4rem
+            );
+
+        line-height: 1.45;
+
+        margin: 14px 0;
+    }
+
+
+    #heart {
+
+        margin-top: 30px;
+
+        font-size: 45px;
+    }
+
+
+    .quoteEnding {
+
+        margin-top: 20px;
+
+        font-size: .6rem;
+
+        line-height: 1.6;
+
+        letter-spacing: 2px;
+    }
+
+
+    .quoteGlow {
+
+        width: 350px;
+
+        height: 350px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:380px) {
+
+    .quote .line {
+
+        font-size: 1.45rem;
+
+        margin: 11px 0;
+    }
+
+
+    #heart {
+
+        margin-top: 25px;
+
+        font-size: 40px;
+    }
+
+
+    .quoteEnding {
+
+        font-size: .55rem;
+
+        letter-spacing: 1.5px;
+    }
+}
 
 /* =========================================================
    LETTER PAGE

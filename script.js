@@ -144,7 +144,7 @@ setVideoForDevice();
 
 const targetDate =
     new Date(
-        "August 22, 2026 00:00:00"
+        "August 22, 2025 00:00:00"
     ).getTime();
 
 
@@ -329,41 +329,130 @@ introVideo.addEventListener(
 
 function showQuote() {
 
+    /* Show quote page */
+
     showPage(quotePage);
 
 
+    /* Get elements */
+
     const lines =
-        document.querySelectorAll(
+        quotePage.querySelectorAll(
             ".quote .line"
         );
 
+    const heart =
+        quotePage.querySelector(
+            "#heart"
+        );
 
-    lines.forEach(
-        (line, index) => {
+    const ending =
+        quotePage.querySelector(
+            ".quoteEnding"
+        );
 
-            setTimeout(() => {
 
-                line.style.opacity = "1";
+    /* Safety reset */
 
-            }, index * 2500);
+    lines.forEach(line => {
 
-        }
-    );
+        line.classList.remove("show");
 
+    });
+
+
+    if (heart) {
+
+        heart.classList.remove("show");
+
+    }
+
+
+    if (ending) {
+
+        ending.classList.remove("show");
+
+    }
+
+
+    /* =====================================================
+       LINE 1
+    ===================================================== */
 
     setTimeout(() => {
 
-        document
-            .getElementById("heart")
-            .style.opacity = "1";
+        if (lines[0]) {
 
-    }, 8000);
+            lines[0].classList.add("show");
+
+        }
+
+    }, 900);
 
 
-    /*
-        After the quote finishes,
-        show the envelope.
-    */
+    /* =====================================================
+       LINE 2
+    ===================================================== */
+
+    setTimeout(() => {
+
+        if (lines[1]) {
+
+            lines[1].classList.add("show");
+
+        }
+
+    }, 2900);
+
+
+    /* =====================================================
+       LINE 3
+    ===================================================== */
+
+    setTimeout(() => {
+
+        if (lines[2]) {
+
+            lines[2].classList.add("show");
+
+        }
+
+    }, 4900);
+
+
+    /* =====================================================
+       HEART
+    ===================================================== */
+
+    setTimeout(() => {
+
+        if (heart) {
+
+            heart.classList.add("show");
+
+        }
+
+    }, 6800);
+
+
+    /* =====================================================
+       ENDING
+    ===================================================== */
+
+    setTimeout(() => {
+
+        if (ending) {
+
+            ending.classList.add("show");
+
+        }
+
+    }, 8200);
+
+
+    /* =====================================================
+       NEXT PAGE
+    ===================================================== */
 
     setTimeout(() => {
 
@@ -371,9 +460,9 @@ function showQuote() {
 
         setupEnvelope();
 
-    }, 10500);
-}
+    }, 11500);
 
+}
 
 /* =========================================================
    ENVELOPE
