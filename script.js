@@ -17,12 +17,16 @@ const letterPage =
 const memoryPage =
     document.getElementById("memoryPage");
 
+const chatPage =
+    document.getElementById("chatPage");
+
 const questionPage =
     document.getElementById("questionPage");
 
 const finalPage =
     document.getElementById("finalPage");
 
+    let chatAnimationStarted = false;
 
 /* Main elements */
 
@@ -144,7 +148,7 @@ setVideoForDevice();
 
 const targetDate =
     new Date(
-        "August 22, 2025 00:00:00"
+        "August 22, 2026 00:00:00"
     ).getTime();
 
 
@@ -891,7 +895,7 @@ function exitMemoryWall() {
 
     if (memoryWordsTimer) {
 
-        clearInterval(
+        clearTimeout(
             memoryWordsTimer
         );
 
@@ -915,18 +919,364 @@ function exitMemoryWall() {
     );
 
 
-    document
-        .querySelector(".memoryText")
-        .style.opacity = "0";
+    const memoryText =
+        document.querySelector(
+            ".memoryText"
+        );
+
+
+    if (memoryText) {
+
+        memoryText.style.opacity = "0";
+
+    }
+
+
+    setTimeout(() => {
+
+        showPage(chatPage);
+
+        startChatAnimation();
+
+    }, 2500);
+}
+
+
+/* =========================================================
+   CHAT MEMORIES
+========================================================= */
+
+const chatMemories =
+    document.querySelectorAll(
+        ".chatMemory"
+    );
+
+
+const chatCounter =
+    document.getElementById(
+        "chatCounter"
+    );
+
+
+let chatPositions = [];
+
+
+/* =========================================================
+   GENERATE RANDOM POSITIONS
+========================================================= */
+
+function generateChatPositions() {
+
+    const isMobile =
+        window.matchMedia(
+            "(max-width: 600px)"
+        ).matches;
+
+
+    /*
+        مناطق آمنة على الشاشة.
+
+        بنقسم الشاشة لمناطق تقريبية
+        عشان الصور متتكدسش فوق بعض.
+    */
+
+    if (isMobile) {
+
+        chatPositions = [
+
+            {
+                left: "8%",
+                top: "12%"
+            },
+
+            {
+                left: "43%",
+                top: "10%"
+            },
+
+            {
+                left: "20%",
+                top: "28%"
+            },
+
+            {
+                left: "50%",
+                top: "34%"
+            },
+
+            {
+                left: "5%",
+                top: "48%"
+            },
+
+            {
+                left: "42%",
+                top: "58%"
+            },
+
+            {
+                left: "18%",
+                top: "68%"
+            }
+
+        ];
+
+    } else {
+
+        chatPositions = [
+
+            {
+                left: "8%",
+                top: "13%"
+            },
+
+            {
+                left: "37%",
+                top: "8%"
+            },
+
+            {
+                left: "68%",
+                top: "15%"
+            },
+
+            {
+                left: "18%",
+                top: "55%"
+            },
+
+            {
+                left: "45%",
+                top: "48%"
+            },
+
+            {
+                left: "73%",
+                top: "52%"
+            },
+
+            {
+                left: "40%",
+                top: "68%"
+            }
+
+        ];
+    }
+
+
+    /*
+        Shuffle أماكن الصور فقط.
+
+        الصور نفسها تظل:
+        chat1 → chat2 → chat3...
+    */
+
+    chatPositions =
+        [...chatPositions]
+            .sort(
+                () => Math.random() - .5
+            );
+}
+
+
+/* =========================================================
+   RANDOM ROTATION
+========================================================= */
+
+function randomRotation() {
+
+    return (
+        Math.random() * 24 - 12
+    );
+}
+
+
+/* =========================================================
+   START CHAT ANIMATION
+========================================================= */
+
+function startChatAnimation() {
+
+    if (chatAnimationStarted) {
+
+        return;
+    }
+
+
+    chatAnimationStarted = true;
+
+
+    generateChatPositions();
+
+
+    /*
+        Reset.
+    */
+
+    chatMemories.forEach(
+        chat => {
+
+            chat.classList.remove(
+                "chat-visible"
+            );
+
+            chat.style.left = "";
+
+            chat.style.top = "";
+
+            chat.style.setProperty(
+                "--chat-rotation",
+                "0deg"
+            );
+
+        }
+    );
+
+
+    /*
+        Hide intro first.
+    */
+
+    const intro =
+        document.querySelector(
+            ".chatIntro"
+        );
+
+
+    if (intro) {
+
+        intro.style.opacity = "1";
+
+    }
+
+
+    /*
+        Intro disappears.
+    */
+
+    setTimeout(() => {
+
+        if (intro) {
+
+            intro.style.opacity = "0";
+
+        }
+
+        if (chatCounter) {
+
+            chatCounter.classList.add(
+                "show"
+            );
+
+        }
+
+    }, 2200);
+
+
+    /*
+        Show screenshots
+        ONE BY ONE.
+
+        Important:
+        index is the original order.
+    */
+
+    chatMemories.forEach(
+        (chat, index) => {
+
+            if (index === chatMemories.length - 1) {
+
+    chat.style.left = "50%";
+    chat.style.top = "38%";
+
+    chat.style.setProperty(
+        "--chat-rotation",
+        "0deg"
+    );
+        chat.classList.add("chat-main");
+} else {
+
+    const position =
+        chatPositions[index];
+
+    chat.style.left =
+        position.left;
+
+    chat.style.top =
+        position.top;
+
+    chat.style.setProperty(
+        "--chat-rotation",
+        `${randomRotation()}deg`
+    );
+}
+
+            /*
+                كل صورة بعدها 2.7 ثانية
+            */
+
+            setTimeout(() => {
+
+                chat.classList.add(
+                    "chat-visible"
+                );
+
+
+                if (chatCounter) {
+
+                    chatCounter.textContent =
+                        `${String(index + 1).padStart(2, "0")} / 07`;
+
+                }
+
+            }, 3000 + index * 2700);
+
+        }
+    );
+
+
+    /*
+        بعد ظهور آخر صورة
+        نستنى شوية ونخرج.
+    */
+
+    const totalTime =
+        3000 +
+        (chatMemories.length - 1) * 2700 +
+        6500;
+
+
+    setTimeout(() => {
+
+        exitChatPage();
+
+    }, totalTime);
+}
+
+
+/* =========================================================
+   EXIT CHAT PAGE
+========================================================= */
+
+function exitChatPage() {
+
+    chatPage.classList.add(
+        "chat-exit"
+    );
 
 
     setTimeout(() => {
 
         showPage(questionPage);
 
-    }, 2500);
-}
+        chatPage.classList.remove(
+            "chat-exit"
+        );
 
+        chatAnimationStarted = false;
+
+    }, 1800);
+}
 
 /* =========================================================
    NO BUTTON
